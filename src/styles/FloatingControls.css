@@ -1,0 +1,40 @@
+.floating-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  z-index: 1000;
+}
+
+/* BUTTON STYLE */
+.floating-controls button {
+  background: #e50914;
+  color: #fff;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 10px 14px;
+  min-width: 110px;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* hover */
+.floating-controls button:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+/* focus accessibility */
+.floating-controls button:focus {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}

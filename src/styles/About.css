@@ -1,0 +1,242 @@
+/* =========================
+   PAGE
+========================= */
+.about-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, #121212 0%, #070707 55%, #040404 100%);
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   HERO
+========================= */
+.about-hero {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 80px 0 60px;
+
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-kicker {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 16px;
+
+  color: #e50914;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  margin: 0 0 18px;
+  color: #fff;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.about-intro {
+  max-width: 650px;
+  color: #d3d3d3;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* =========================
+   HERO IMAGE
+========================= */
+.about-hero-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.about-hero-image {
+  width: min(100%, 420px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+/* =========================
+   CONTENT WRAPPER
+========================= */
+.about-content {
+  padding: 10px 0 90px;
+}
+
+.about-container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* =========================
+   ABOUT GRID
+========================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+/* =========================
+   ABOUT CARD
+========================= */
+.about-card {
+  background: linear-gradient(180deg, #111111 0%, #0b0b0b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 30px 28px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(229, 9, 20, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.36);
+}
+
+.about-card-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  color: #ff4d57;
+
+  padding: 7px 12px;
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.about-card h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+
+.about-card p {
+  color: #d0d0d0;
+  line-height: 1.9;
+  font-size: 1rem;
+  margin: 0 0 16px;
+}
+
+.about-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 1024px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 70px 0 50px;
+  }
+
+  .about-hero-text {
+    text-align: center;
+    align-items: center;
+  }
+
+  .about-intro {
+    max-width: 720px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 55px 0 40px;
+    gap: 28px;
+  }
+
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+
+  .about-intro {
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .about-hero-image {
+    width: min(100%, 320px);
+    border-radius: 22px;
+  }
+
+  .about-content {
+    padding: 0 0 60px;
+  }
+
+  .about-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .about-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .about-card p {
+    font-size: 0.96rem;
+    line-height: 1.8;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+@media (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .about-kicker {
+    font-size: 0.74rem;
+  }
+
+  .about-card-tag {
+    font-size: 0.7rem;
+  }
+}

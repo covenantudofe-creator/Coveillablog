@@ -1,0 +1,144 @@
+/* =========================
+   PAGE
+========================= */
+.admin-page {
+  min-height: 100vh;
+  background: #050505;
+  color: #ffffff;
+}
+
+.admin-hero {
+  text-align: center;
+  padding: 90px 20px 40px;
+}
+
+.admin-kicker {
+  color: #e50914;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.admin-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  margin: 0 0 14px;
+}
+
+.admin-intro {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #cfcfcf;
+  line-height: 1.8;
+}
+
+.admin-section {
+  padding: 10px 20px 70px;
+}
+
+.admin-container {
+  width: min(1100px, 94%);
+  margin: 0 auto;
+}
+
+.admin-status,
+.admin-error {
+  text-align: center;
+  padding: 30px;
+  background: #111;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.admin-error {
+  color: #ff8b8b;
+}
+
+/* =========================
+   MESSAGE GRID
+========================= */
+.messages-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.message-card {
+  background: #0d0d0d;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.message-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.message-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  color: #fff;
+}
+
+.message-name {
+  margin: 0 0 6px;
+  color: #f3f3f3;
+  font-weight: 600;
+}
+
+.message-email {
+  margin: 0;
+  color: #bdbdbd;
+  font-size: 0.95rem;
+}
+
+.message-body {
+  color: #d6d6d6;
+  line-height: 1.9;
+  margin: 0 0 20px;
+  white-space: pre-wrap;
+}
+
+.message-date {
+  color: #9a9a9a;
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.delete-btn {
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: #e50914;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .message-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delete-btn {
+    width: 100%;
+  }
+
+  .message-card {
+    padding: 18px;
+  }
+}

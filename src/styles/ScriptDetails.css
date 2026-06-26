@@ -1,0 +1,446 @@
+/* =========================
+   PAGE WRAPPER
+========================= */
+.script-details {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #111 0%, #050505 60%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   TOP ACTION BAR
+========================= */
+.top-actions {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.top-actions button {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.top-actions button:hover {
+  background: rgba(229, 9, 20, 0.18);
+  border-color: rgba(229, 9, 20, 0.45);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.script-hero {
+  min-height: 72vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.overlay {
+  width: 100%;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(
+      to top,
+      rgba(5, 5, 5, 0.97) 8%,
+      rgba(0, 0, 0, 0.55) 45%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  padding: 48px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin: 0;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.author {
+  opacity: 0.82;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.category {
+  width: fit-content;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(229, 9, 20, 0.16);
+  border: 1px solid rgba(229, 9, 20, 0.45);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.hero-logline {
+  max-width: 720px;
+  color: #d6d6d6;
+  line-height: 1.85;
+  font-size: 1.05rem;
+  margin-top: 4px;
+}
+
+/* =========================
+   BODY SECTION
+========================= */
+.script-body {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0 20px;
+}
+
+.script-wrapper {
+  width: min(950px, 92%);
+  position: relative;
+}
+
+/* =========================
+   SCRIPT TEXT
+========================= */
+.script-text {
+  white-space: pre-wrap;
+  background: rgba(15, 15, 15, 0.78);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 34px;
+  line-height: 1.9;
+  font-size: 1rem;
+  color: #ececec;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================
+   MATURE OVERLAY
+========================= */
+.mature-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+.mature-overlay h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.mature-overlay p {
+  max-width: 500px;
+  color: #d6d6d6;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.unlock-btn {
+  background: #e50914;
+  border: none;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.unlock-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(229, 9, 20, 0.28);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* =========================
+   CONTINUE READING / MORE SCRIPTS
+========================= */
+.continue-scripts {
+  padding: 40px 20px 90px;
+}
+
+.continue-scripts-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.continue-header {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.continue-kicker {
+  color: #e50914;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.continue-header h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 12px;
+  color: #ffffff;
+}
+
+.continue-subtext {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #cfcfcf;
+  line-height: 1.8;
+}
+
+/* GRID */
+.continue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+/* CARD */
+.continue-grid .article-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: #0d0d0d;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.35);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  min-height: 100%;
+}
+
+.continue-grid .article-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+  border-color: rgba(229, 9, 20, 0.28);
+}
+
+/* IMAGE = POSTER STYLE */
+.continue-grid .article-card-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+}
+
+.continue-grid .article-card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.30) 0%,
+    rgba(0,0,0,0.04) 45%,
+    rgba(0,0,0,0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.continue-grid .article-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.continue-grid .article-card:hover .article-card-image img {
+  transform: scale(1.04);
+}
+
+/* CONTENT */
+.continue-grid .article-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  flex: 1;
+}
+
+.continue-grid .article-category {
+  align-self: flex-start;
+  background: #e50914;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.continue-grid .article-title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.continue-grid .article-excerpt {
+  margin: 0;
+  color: #cfcfcf;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.continue-grid .article-read {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  transition: color 0.25s ease;
+}
+
+.continue-grid .article-card:hover .article-read {
+  color: #e50914;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 1024px) {
+  .continue-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .overlay {
+    padding: 36px;
+  }
+
+  .script-text {
+    padding: 28px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .top-actions {
+    padding: 0 14px;
+    top: 12px;
+  }
+
+  .top-actions button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .script-hero,
+  .overlay {
+    min-height: 60vh;
+  }
+
+  .overlay {
+    padding: 24px 18px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-logline {
+    font-size: 0.96rem;
+  }
+
+  .script-body {
+    padding: 30px 0 10px;
+  }
+
+  .script-text {
+    padding: 20px;
+    font-size: 0.95rem;
+    line-height: 1.85;
+  }
+
+  .continue-scripts {
+    padding: 24px 15px 60px;
+  }
+
+  .continue-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .continue-grid .article-card-content {
+    padding: 18px;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.7rem;
+  }
+
+  .category {
+    font-size: 0.72rem;
+  }
+
+  .script-text {
+    padding: 18px;
+  }
+
+  .mature-overlay h2 {
+    font-size: 1.45rem;
+  }
+}

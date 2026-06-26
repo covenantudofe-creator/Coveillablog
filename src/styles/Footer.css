@@ -1,0 +1,183 @@
+/* =========================
+   FOOTER BASE
+========================= */
+.footer {
+  background: #0b0b0b;
+  color: #ffffff;
+
+  padding: 70px 20px 40px;
+
+  display: flex;
+  justify-content: center;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* =========================
+   CONTENT WRAPPER
+========================= */
+.footer-content {
+  max-width: 900px;
+  width: 100%;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* =========================
+   TITLE
+========================= */
+.footer-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: #ffffff;
+
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================
+   ROLE TEXT
+========================= */
+.footer-role {
+  color: #b3b3b3;
+  font-size: 1rem;
+
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   CONTACT SECTION
+========================= */
+.footer-contact {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  font-size: 0.95rem;
+  color: #b3b3b3;
+}
+
+/* LINKS (EMAIL + PHONE) */
+.footer-contact a {
+  color: #e50914;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+
+  border-bottom: 1px solid transparent;
+}
+
+/* VISITED STATE FIX (removes blue/purple bug) */
+.footer-contact a:visited {
+  color: #e50914;
+}
+
+/* HOVER EFFECT */
+.footer-contact a:hover {
+  color: #ff2a2a;
+  border-bottom: 1px solid #e50914;
+
+  transform: translateY(-1px);
+}
+
+/* ACTIVE CLICK */
+.footer-contact a:active {
+  color: #ff2a2a;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+
+  flex-wrap: wrap;
+
+  margin-top: 10px;
+}
+
+/* NAV LINKS STYLE */
+.footer-links a {
+  color: #d1d1d1;
+  text-decoration: none;
+
+  font-size: 0.95rem;
+
+  transition: all 0.25s ease;
+
+  position: relative;
+}
+
+/* HOVER */
+.footer-links a:hover {
+  color: #e50914;
+  transform: translateY(-2px);
+}
+
+/* UNDERLINE ANIMATION */
+.footer-links a::after {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 0%;
+  height: 2px;
+
+  background: #e50914;
+
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   DIVIDER
+========================= */
+.footer-divider {
+  width: 60%;
+  height: 1px;
+
+  margin: 18px auto;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   COPYRIGHT
+========================= */
+.copyright {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .footer-title {
+    font-size: 1.4rem;
+  }
+
+  .footer-links {
+    gap: 15px;
+  }
+
+  .footer-role {
+    font-size: 0.95rem;
+  }
+}

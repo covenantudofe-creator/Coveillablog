@@ -1,0 +1,156 @@
+.hero {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* softer than pure black = easier on eyes */
+  background: linear-gradient(180deg, #0b0b0f 0%, #050508 100%);
+  overflow: hidden;
+  color: #fff;
+}
+
+/* cinematic glow blobs */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.25;
+}
+
+.hero::before {
+  width: 500px;
+  height: 500px;
+  background: #e50914;
+  top: -120px;
+  left: -120px;
+}
+
+.hero::after {
+  width: 450px;
+  height: 450px;
+  background: #ffffff;
+  bottom: -150px;
+  right: -150px;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-content {
+  max-width: 780px;
+  text-align: left;
+  animation: fadeUp 0.9s ease-out;
+}
+
+/* headline */
+.hero-content h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Netflix-style accent */
+.hero-content h1 span {
+  color: #e50914;
+  text-shadow: 0 0 18px rgba(229, 9, 20, 0.5);
+}
+
+/* readable but “story vibe” */
+.hero-content p {
+  margin-top: 18px;
+  max-width: 520px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+
+  /* slight drama, not too much strain */
+  font-style: italic;
+}
+
+/* buttons row */
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 14px;
+}
+
+/* shared button style */
+.hero-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  font-size: 0.95rem;
+}
+
+/* primary */
+.hero-btn.primary {
+  background: #e50914;
+  color: white;
+  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.25);
+}
+
+.hero-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(229, 9, 20, 0.4);
+}
+
+/* secondary */
+.hero-btn.secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-btn.secondary:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* entry animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
