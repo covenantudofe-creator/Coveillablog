@@ -1,3 +1,6 @@
+# Environment files
 .env
-node_modules/
-database/*.sqlite
+backend/.env
+
+# Dependencies
+backend/node_modules/
