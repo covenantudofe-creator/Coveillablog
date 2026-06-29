@@ -1,5 +1,5 @@
 import { useState } from "react";
-import profileImage from "../assets/imageportfolio.jpg";
+import profileImage from "../assets/Imageportfolio.jpg";
 import "../styles/Contact.css";
 
 function Contact() {
