@@ -1,178 +1,431 @@
-/* =========================
-   PAGE
-========================= */
+/* ==========================================
+   ARTICLE DETAILS PAGE
+========================================== */
+
 .article-details {
-  background: #050505;
-  color: #ffffff;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #141414 0%, #090909 55%, #050505 100%);
+  color: #fff;
 }
 
-.not-found {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 20px;
-}
-
-.not-found-box {
-  background: #0b0b0b;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px;
-  border-radius: 18px;
-  text-align: center;
-  max-width: 600px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-}
-
-.not-found-box h2 {
-  color: #e50914;
-  margin-bottom: 12px;
-  font-size: 2rem;
-}
-
-.not-found-box p {
-  color: #d0d0d0;
-  line-height: 1.7;
-}
-
-/* =========================
+/* ==========================================
    HERO
-========================= */
+========================================== */
+
 .article-hero {
   position: relative;
-  min-height: 75vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+}
+
+.article-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.45);
+  transform: scale(1.05);
+}
+
+.article-hero-overlay {
+  position: absolute;
+  inset: 0;
+
   display: flex;
   align-items: flex-end;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(5,5,5,.98),
+      rgba(5,5,5,.55),
+      rgba(5,5,5,.15)
+    );
 }
 
-.article-overlay {
-  width: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(5, 5, 5, 1) 0%,
-    rgba(5, 5, 5, 0.8) 35%,
-    rgba(5, 5, 5, 0.35) 100%
-  );
-  padding: 90px 20px 60px;
-}
-
-.article-content {
-  max-width: 900px;
+.article-hero-content {
+  width: min(900px,92%);
   margin: 0 auto;
+  padding-bottom: 80px;
 }
 
-/* =========================
+/* ==========================================
    CATEGORY
-========================= */
+========================================== */
+
 .article-category {
   display: inline-block;
-  background: #e50914;
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 8px 15px;
+
+  padding: 7px 16px;
+
+  background: rgba(229,9,20,.18);
+
+  border: 1px solid rgba(229,9,20,.4);
+
+  color: #E50914;
+
   border-radius: 999px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 14px rgba(229, 9, 20, 0.35);
+
+  font-size: .82rem;
+
+  letter-spacing: 2px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
 }
 
-/* =========================
-   TITLE + SUBTITLE
-========================= */
-.article-content h1 {
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 1.1;
-  margin: 0 0 18px;
+/* ==========================================
+   TITLE
+========================================== */
+
+.article-hero-content h1 {
+  margin-top: 25px;
+  margin-bottom: 18px;
+
+  font-size: clamp(2.4rem,5vw,4.5rem);
+
   font-weight: 900;
-  color: #fff;
+
+  line-height: 1.08;
+
+  letter-spacing: -1px;
+
+  color: white;
+
+  text-shadow: 0 10px 30px rgba(0,0,0,.6);
 }
+
+/* ==========================================
+   SUBTITLE
+========================================== */
 
 .article-subtitle {
-  font-size: 1.15rem;
+  max-width: 700px;
+
+  font-size: 1.2rem;
+
   line-height: 1.8;
-  color: #d6d6d6;
-  max-width: 780px;
-  margin: 0;
+
+  color: rgba(255,255,255,.82);
+
+  font-style: italic;
 }
 
-/* =========================
-   BODY
-========================= */
-.article-body {
-  padding: 60px 20px 90px;
+/* ==========================================
+   WRAPPER
+========================================== */
+
+.article-wrapper {
+  width: min(900px,92%);
+  margin: -70px auto 80px;
+  position: relative;
+  z-index: 10;
 }
 
-.article-text {
-  width: 100%;
-  max-width: 900px;
-  background: #141414;
-  padding: 40px;
-  border-radius: 16px;
-  color: #e6e6e6;
-  line-height: 2;
-  font-size: 1.08rem;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.04);
+/* ==========================================
+   CONTENT CARD
+========================================== */
+
+.article-content {
+
+  background: rgba(18,18,18,.92);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,.05);
+
+  border-radius: 20px;
+
+  padding: 50px;
+
+  box-shadow:
+      0 25px 70px rgba(0,0,0,.6);
+
+  animation: fadeUp .7s ease;
 }
 
-/* Paragraphs */
-.article-text p {
-  font-size: 1.06rem;
-  line-height: 2;
-  color: #e0e0e0;
-  margin: 0 0 22px;
+/* ==========================================
+   META
+========================================== */
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  color: #999;
+
+  font-size: .95rem;
 }
 
-/* Section headings inside article body */
-.article-section-heading {
-  font-size: 1.6rem;
-  line-height: 1.3;
-  color: #ffffff;
-  margin: 40px 0 18px;
-  font-weight: 800;
-}
-
-/* Bold lists or numbered parts if they appear as plain text */
-.article-text strong {
+.article-meta strong {
   color: #fff;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-  .article-hero {
-    min-height: 65vh;
+.article-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  margin: 30px 0;
+}
+
+/* ==========================================
+   BODY
+========================================== */
+
+.article-body {
+  color: #cfcfcf;
+
+  font-size: 1.08rem;
+
+  line-height: 2.05;
+
+  letter-spacing: .25px;
+}
+
+.article-body p {
+  margin-bottom: 28px;
+}
+
+.article-body strong {
+  color: white;
+}
+
+.article-body h2,
+.article-body h3,
+.article-body h4 {
+  color: white;
+  margin: 45px 0 18px;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 20px 0 25px 25px;
+}
+
+.article-body li {
+  margin-bottom: 12px;
+}
+
+.article-body blockquote {
+
+  margin: 40px 0;
+
+  padding: 20px 28px;
+
+  border-left: 4px solid #E50914;
+
+  background: rgba(229,9,20,.05);
+
+  color: #ececec;
+
+  font-style: italic;
+
+  border-radius: 8px;
+}
+
+.article-body img {
+  width: 100%;
+  border-radius: 14px;
+  margin: 35px 0;
+}
+
+.article-body a {
+  color: #E50914;
+  text-decoration: none;
+}
+
+.article-body a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.article-footer {
+  margin-top: 60px;
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.article-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 15px 32px;
+
+  background: linear-gradient(
+      135deg,
+      #E50914,
+      #ff4040
+  );
+
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 999px;
+
+  font-weight: 700;
+
+  transition: .35s;
+
+  box-shadow:
+      0 12px 35px rgba(229,9,20,.35);
+}
+
+.article-btn:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow:
+      0 20px 45px rgba(229,9,20,.5);
+}
+
+/* ==========================================
+   NOT FOUND
+========================================== */
+
+.article-not-found {
+
+  width: min(700px,92%);
+
+  margin: 120px auto;
+
+  padding: 60px;
+
+  text-align: center;
+
+  background: #111;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.article-not-found h1 {
+
+  font-size: 3rem;
+
+  color: white;
+
+  margin-bottom: 20px;
+}
+
+.article-not-found p {
+
+  color: #999;
+
+  margin-bottom: 40px;
+
+  line-height: 1.8;
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
 
-  .article-overlay {
-    padding: 70px 16px 40px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .article-subtitle {
-    font-size: 1rem;
-    line-height: 1.7;
-  }
+}
 
-  .article-body {
-    padding: 40px 16px 70px;
-  }
+/* ==========================================
+   TABLET
+========================================== */
 
-  .article-text {
-    padding: 28px 20px;
-    border-radius: 16px;
-  }
+@media (max-width:900px){
 
-  .article-text p {
-    font-size: 1rem;
-    line-height: 1.9;
-  }
+.article-hero{
+height:65vh;
+}
 
-  .article-section-heading {
-    font-size: 1.35rem;
-  }
+.article-content{
+padding:35px;
+}
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+.article-hero{
+height:55vh;
+}
+
+.article-hero-content{
+padding-bottom:50px;
+}
+
+.article-hero-content h1{
+font-size:2.4rem;
+}
+
+.article-subtitle{
+font-size:1rem;
+}
+
+.article-wrapper{
+margin-top:-40px;
+}
+
+.article-content{
+padding:28px;
+}
+
+.article-meta{
+flex-direction:column;
+}
+
+.article-body{
+font-size:1rem;
+line-height:1.9;
+}
+
+}
+
+/* ==========================================
+   SMALL PHONES
+========================================== */
+
+@media (max-width:480px){
+
+.article-hero{
+height:48vh;
+}
+
+.article-hero-content h1{
+font-size:2rem;
+}
+
+.article-content{
+padding:22px;
+}
+
+.article-btn{
+width:100%;
+}
+
 }

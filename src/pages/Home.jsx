@@ -13,62 +13,40 @@ import "../styles/Home.css";
 const Home = () => {
   return (
     <main className="home-page">
+
       {/* ================= HERO ================= */}
       <Hero />
 
+      {/* ================= PAGE CONTENT ================= */}
       <div className="home-container">
 
-        {/* ================= FEATURED STORY ================= */}
-        <section className="featured-story">
-
-          <div className="featured-story-text">
-
-            <p className="section-kicker">
-              FEATURED EXPERIENCE
-            </p>
-
-            <h2>Stories That Stay With You</h2>
-
-            <p className="featured-description">
-              Every screenplay, article, and character on Coveilla is
-              written to leave something behind—an emotion, a question,
-              or a memory that lingers long after the final page.
-            </p>
-
-            <Link to="/scripts" className="featured-btn">
-              Start Reading →
-            </Link>
-
-          </div>
-
-          <div className="featured-story-image">
-
-            <img
-  src="https://i.pinimg.com/1200x/53/b0/27/53b027de56295e89a773d411cd4256a2.jpg"
-  alt="Featured Story"
-/>
-          </div>
-
-        </section>
-
-        {/* ================= FEATURED SCRIPTS ================= */}
+        {/* ================= FEATURED SCREENPLAYS ================= */}
         <section className="home-section">
 
           <div className="section-header">
 
             <div>
+
               <p className="section-kicker">
-                COVEILLA ORIGINALS
+                FEATURED COLLECTION
               </p>
 
-              <h2>Featured Scripts</h2>
+              <h2>
+                Original Screenplays
+              </h2>
+
+              <p className="section-description">
+                Character-driven stories written with cinematic emotion,
+                unforgettable conflicts, and powerful endings.
+              </p>
+
             </div>
 
             <Link
               to="/scripts"
               className="section-link"
             >
-              View All →
+              View Library →
             </Link>
 
           </div>
@@ -92,18 +70,27 @@ const Home = () => {
           <div className="section-header">
 
             <div>
+
               <p className="section-kicker">
                 LATEST WRITING
               </p>
 
-              <h2>Latest Articles</h2>
+              <h2>
+                Articles & Reflections
+              </h2>
+
+              <p className="section-description">
+                Essays, reflections, psychology, creativity,
+                and the stories behind the storyteller.
+              </p>
+
             </div>
 
             <Link
               to="/articles"
               className="section-link"
             >
-              View All →
+              Explore Articles →
             </Link>
 
           </div>
@@ -121,26 +108,44 @@ const Home = () => {
 
         </section>
 
-        {/* ================= CTA SECTION ================= */}
+        {/* ================= CINEMATIC QUOTE ================= */}
+        <section className="cinema-quote">
+
+          <p className="section-kicker">
+            COVEILLA
+          </p>
+
+          <h2>
+            "Stories don't end when the credits roll.
+            The best ones stay with you."
+          </h2>
+
+        </section>
+
+        {/* ================= CALL TO ACTION ================= */}
         <section className="home-cta">
 
           <div className="cta-content">
 
+            <p className="section-kicker">
+              START YOUR JOURNEY
+            </p>
+
             <h2>
-              Great stories deserve great readers.
+              Discover Stories Worth Remembering
             </h2>
 
             <p>
-              Dive into cinematic screenplays,
-              thoughtful articles, and unforgettable
-              storytelling crafted to inspire.
+              Explore original screenplays, thoughtful articles,
+              and cinematic storytelling created to inspire,
+              challenge, and stay with you long after you've finished reading.
             </p>
 
             <Link
-              to="/articles"
+              to="/scripts"
               className="featured-btn"
             >
-              Explore the Collection
+              Explore Coveilla
             </Link>
 
           </div>
@@ -149,12 +154,16 @@ const Home = () => {
 
         {/* ================= NEWSLETTER ================= */}
         <section className="home-newsletter">
+
           <Newsletter />
+
         </section>
 
       </div>
+
     </main>
   );
 };
 
 export default Home;
+

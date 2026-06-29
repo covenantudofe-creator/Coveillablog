@@ -11,7 +11,6 @@ import Scripts from "./pages/Scripts";
 import Articles from "./pages/Articles";
 import AdminMessages from "./pages/AdminMessages";
 
-import BlogDetails from "./pages/BlogDetails";
 import ScriptDetails from "./pages/ScriptDetails";
 import ArticleDetails from "./pages/ArticleDetails";
 
@@ -34,8 +33,7 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         <Route path="/article/:slug" element={<ArticleDetails />} />
 
-        {/* Blog */}
-        <Route path="/blog/:slug" element={<BlogDetails />} />
+        
 
         {/* Admin */}
         <Route path="/admin/messages" element={<AdminMessages />} />

@@ -8,13 +8,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function sendEmail(to, subject, html) {
-  return transporter.sendMail({
-    from: `"Coveilla Blog" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-  });
-}
+const sendEmail = async (to, subject, html) => {
+  try {
+    await transporter.sendMail({
+      from: `"Coveilla" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      html,
+    });
+
+    console.log(`✅ Email sent to ${to}`);
+  } catch (error) {
+    console.error("❌ Email Error:", error);
+    throw error;
+  }
+};
 
 module.exports = sendEmail;

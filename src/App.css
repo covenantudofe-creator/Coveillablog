@@ -1,94 +1,127 @@
-/* =========================
+/* ==========================================
    GLOBAL RESET
-========================= */
-* {
+========================================== */
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
+/* ==========================================
+   ROOT
+========================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ==========================================
    BODY
-========================= */
+========================================== */
+
 body {
   background: #050505;
   color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
-  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* =========================
-   MAIN APP WRAPPER
-========================= */
+/* ==========================================
+   APP
+========================================== */
+
 .app {
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #050505;
 }
 
-/* =========================
-   MAIN CONTENT AREA
-========================= */
+/* ==========================================
+   MAIN CONTENT
+========================================== */
+
 main {
   flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-top: 70px; /* navbar space */
+  padding-top: 70px; /* Navbar Height */
 }
 
-/* =========================
+/* ==========================================
+   IMAGES
+========================================== */
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================================
    LINKS
-========================= */
+========================================== */
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* =========================
-   SCROLLBAR (NETFLIX STYLE)
-========================= */
-::-webkit-scrollbar {
-  width: 8px;
+/* ==========================================
+   BUTTONS
+========================================== */
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
-::-webkit-scrollbar-track {
-  background: #0b0b0b;
+/* ==========================================
+   LISTS
+========================================== */
+
+ul,
+ol {
+  list-style: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #e50914;
-  border-radius: 10px;
-}
+/* ==========================================
+   CONTAINER
+========================================== */
 
-::-webkit-scrollbar-thumb:hover {
-  background: #ff1a1a;
-}
-
-/* =========================
-   TEXT SELECTION
-========================= */
-::selection {
-  background: #e50914;
-  color: white;
-}
-
-/* =========================
-   CONTAINER SYSTEM
-========================= */
 .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: min(92%, 1200px);
+  margin-inline: auto;
 }
 
-/* =========================
+/* ==========================================
    FLEX UTILITIES
-========================= */
+========================================== */
+
 .flex {
   display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-center {
@@ -103,9 +136,9 @@ a {
   justify-content: space-between;
 }
 
-.flex-column {
+.flex-wrap {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .gap-10 {
@@ -116,116 +149,193 @@ a {
   gap: 20px;
 }
 
-/* =========================
-   GRID SYSTEM
-========================= */
+.gap-30 {
+  gap: 30px;
+}
+
+/* ==========================================
+   GRID UTILITIES
+========================================== */
+
 .grid {
   display: grid;
   gap: 20px;
 }
 
-/* 3-column grid (desktop) */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-/* responsive grid */
-@media (max-width: 900px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* auto responsive cards grid */
 .grid-auto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-/* =========================
-   CARD UI
-========================= */
+/* ==========================================
+   CARD
+========================================== */
+
 .card {
-  background: #0b0b0b;
-  border-radius: 12px;
-  padding: 15px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: #111111;
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 35px rgba(0,0,0,.35);
 }
 
-/* =========================
-   FADE IN ANIMATION
-========================= */
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090909;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e50914;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff2b35;
+}
+
+/* ==========================================
+   TEXT SELECTION
+========================================== */
+
+::selection {
+  background: #e50914;
+  color: #ffffff;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
 @keyframes fadeIn {
+
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 .fade-in {
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn .6s ease;
 }
 
-/* =========================
-   NAVBAR (FLEX LAYOUT)
-========================= */
+/* ==========================================
+   NAVBAR
+========================================== */
+
 .navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+
+  width: 100%;
+  height: 70px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(10px);
+
+  padding: 0 30px;
+
+  background: rgba(0,0,0,.88);
+
+  backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(255,255,255,.05);
+
   z-index: 1000;
 }
 
-/* =========================
-   FOOTER (FLEX)
-========================= */
+/* ==========================================
+   FOOTER
+========================================== */
+
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: #0b0b0b;
   margin-top: auto;
+
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #090909;
+
+  border-top: 1px solid rgba(255,255,255,.05);
 }
 
-/* =========================
-   RESPONSIVE BASE
-========================= */
-@media (max-width: 768px) {
-  main {
-    padding-top: 60px;
-  }
+/* ==========================================
+   RESPONSIVE
+========================================== */
 
-  .container {
-    width: 92%;
-  }
+@media (max-width:900px){
 
-  .navbar {
-    padding: 12px 18px;
-  }
+.grid-3{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media (max-width:768px){
+
+main{
+padding-top:65px;
+}
+
+.navbar{
+height:65px;
+padding:0 18px;
+}
+
+.grid-2,
+.grid-3{
+grid-template-columns:1fr;
+}
+
+.container{
+width:min(94%,1200px);
+}
+
+}
+
+@media (max-width:480px){
+
+body{
+font-size:15px;
+}
+
+.container{
+width:95%;
+}
+
 }

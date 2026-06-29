@@ -8,7 +8,7 @@ function Articles() {
       <div className="articles-container">
         {/* PAGE HEADER */}
         <section className="articles-hero">
-          <p className="articles-kicker">COVEILLA WRITING</p>
+         
           <h1 className="articles-heading">Articles & Reflections</h1>
           <p className="articles-intro">
             A collection of essays, reflections, psychology pieces, and personal

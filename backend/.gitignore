@@ -1,6 +1,24 @@
-# Environment files
+# dependencies
+node_modules/
+
+# production
+dist/
+
+# environment variables
 .env
 backend/.env
 
-# Dependencies
-backend/node_modules/
+# SQLite database
+database/blog.sqlite
+
+
+# logs
+*.log
+
+# operating system
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/

@@ -101,7 +101,7 @@ function visitorEmail(name) {
       </p>
 
       <p>
-        Every conversation starts with a single message — and yours just did.
+        Every conversation starts with a single message and yours just did.
       </p>
 
       <p style="
