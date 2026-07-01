@@ -1,40 +1,67 @@
 .floating-controls {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  left: 16px;
+  bottom: 16px;
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 
   z-index: 1000;
+
+  max-width: calc(100vw - 32px);
 }
 
-/* BUTTON STYLE */
 .floating-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background: #e50914;
-  color: #fff;
+  color: #ffffff;
 
   border: none;
   border-radius: 10px;
 
   padding: 10px 14px;
-  min-width: 110px;
+
+  min-width: 90px;
+  max-width: 120px;
 
   font-size: 14px;
+  font-weight: 600;
+
   cursor: pointer;
 
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+
+  transition: transform .25s ease,
+              background .25s ease;
 }
 
-/* hover */
 .floating-controls button:hover {
-  transform: scale(1.05);
-  opacity: 0.95;
+  background: #ff2b35;
+  transform: translateY(-2px);
 }
 
-/* focus accessibility */
 .floating-controls button:focus {
-  outline: 2px solid #fff;
+  outline: 2px solid #ffffff;
   outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+
+  .floating-controls {
+    left: 12px;
+    bottom: 12px;
+    gap: 8px;
+  }
+
+  .floating-controls button {
+    min-width: 78px;
+    max-width: 100px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
 }

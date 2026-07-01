@@ -1,3 +1,5 @@
+import "./App.css";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -9,37 +11,47 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Scripts from "./pages/Scripts";
 import Articles from "./pages/Articles";
-import AdminMessages from "./pages/AdminMessages";
-
 import ScriptDetails from "./pages/ScriptDetails";
 import ArticleDetails from "./pages/ArticleDetails";
+import AdminMessages from "./pages/AdminMessages";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <FloatingControls />
+      <div className="app">
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <FloatingControls />
 
-        {/* Scripts */}
-        <Route path="/scripts" element={<Scripts />} />
-        <Route path="/script/:slug" element={<ScriptDetails />} />
+        <main>
+          <Routes>
+            {/* Home */}
+            <Route path="/" element={<Home />} />
 
-        {/* Articles */}
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/article/:slug" element={<ArticleDetails />} />
+            {/* About */}
+            <Route path="/about" element={<About />} />
 
-        
+            {/* Contact */}
+            <Route path="/contact" element={<Contact />} />
 
-        {/* Admin */}
-        <Route path="/admin/messages" element={<AdminMessages />} />
-      </Routes>
+            {/* Scripts */}
+            <Route path="/scripts" element={<Scripts />} />
+            <Route path="/script/:slug" element={<ScriptDetails />} />
 
-      <Footer />
+            {/* Articles */}
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/article/:slug" element={<ArticleDetails />} />
+
+            {/* Admin */}
+            <Route
+              path="/admin/messages"
+              element={<AdminMessages />}
+            />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
