@@ -1,38 +1,94 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  // Close menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Close menu with Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
-    <nav className="navbar">
+    <header className="navbar">
 
       {/* LOGO */}
-      <div className="logo">COVEILLA BLOG</div>
+      <Link
+        to="/"
+        className="logo"
+        onClick={closeMenu}
+      >
+        COVEILLA BLOG
+      </Link>
 
-      {/* HAMBURGER ICON */}
+      {/* MOBILE MENU BUTTON */}
       <button
         className="menu-toggle"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle navigation menu"
+        onClick={() => setMenuOpen((prev) => !prev)}
+        aria-label="Toggle navigation"
         aria-expanded={menuOpen}
+        aria-controls="main-navigation"
       >
         {menuOpen ? "✕" : "☰"}
       </button>
 
-      {/* NAV LINKS */}
-      <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-        <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/scripts" onClick={closeMenu}>Scripts</Link>
-        <Link to="/articles" onClick={closeMenu}>Articles</Link>
-        <Link to="/about" onClick={closeMenu}>About</Link>
-        <Link to="/contact" onClick={closeMenu}>Contact</Link>
-      </div>
+      {/* NAVIGATION */}
+      <nav
+        id="main-navigation"
+        className={`nav-links ${menuOpen ? "active" : ""}`}
+      >
+        <Link to="/" onClick={closeMenu}>
+          Home
+        </Link>
 
-    </nav>
+        <Link to="/scripts" onClick={closeMenu}>
+          Scripts
+        </Link>
+
+        <Link to="/articles" onClick={closeMenu}>
+          Articles
+        </Link>
+
+        <Link to="/about" onClick={closeMenu}>
+          About
+        </Link>
+
+        <Link to="/contact" onClick={closeMenu}>
+          Contact
+        </Link>
+      </nav>
+
+    </header>
   );
 };
 
