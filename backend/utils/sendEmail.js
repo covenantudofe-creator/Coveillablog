@@ -8,6 +8,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// TEST THE CONNECTION
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("❌ SMTP Error:", error);
+  } else {
+    console.log("✅ SMTP server is ready to send emails.");
+  }
+});
+
 const sendEmail = async (to, subject, html) => {
   try {
     await transporter.sendMail({

@@ -93,7 +93,7 @@ const res = await fetch(`${API_URL}/api/contact`, {        method: "POST",
 
                 <div className="creator-poster">
   <img
-    src={profileImage}
+    src="src/assets/Imageportfolio.jpg"
     alt="Godscovenant Patrick Udofe"
     className="creator-image"
   />

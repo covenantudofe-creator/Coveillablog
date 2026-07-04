@@ -75,6 +75,10 @@ const Navbar = () => {
           Scripts
         </Link>
 
+        <Link to="/tv-series" onClick={closeMenu}>
+          TV Series
+        </Link>
+
         <Link to="/articles" onClick={closeMenu}>
           Articles
         </Link>

@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Scripts from "./pages/Scripts";
 import Articles from "./pages/Articles";
+import TVSeries from "./pages/TVSeries";
 import ScriptDetails from "./pages/ScriptDetails";
 import ArticleDetails from "./pages/ArticleDetails";
 import AdminMessages from "./pages/AdminMessages";
@@ -37,6 +38,10 @@ function App() {
             {/* Scripts */}
             <Route path="/scripts" element={<Scripts />} />
             <Route path="/script/:slug" element={<ScriptDetails />} />
+
+            {/* TV Series */}
+
+            <Route path="/tv-series" element={<TVSeries />} />
 
             {/* Articles */}
             <Route path="/articles" element={<Articles />} />

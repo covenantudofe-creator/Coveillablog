@@ -7,67 +7,91 @@ const sendEmail = require("../utils/sendEmail");
 const visitorEmail = require("../emails/visitorEmail");
 const ownerEmail = require("../emails/ownerEmail");
 
-// =========================
-// CREATE NEW CONTACT MESSAGE
-// POST /api/contact
-// =========================
+/* =====================================================
+   CREATE CONTACT MESSAGE
+   POST /api/contact
+===================================================== */
+
 router.post("/", async (req, res) => {
   try {
+    console.log("📩 Incoming Contact Request");
+    console.log(req.body);
+
     const { name, email, subject, message } = req.body;
 
-    // Validate fields
-    if (!name || !email || !subject || !message) {
+    if (
+      !name?.trim() ||
+      !email?.trim() ||
+      !subject?.trim() ||
+      !message?.trim()
+    ) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required",
+        message: "All fields are required.",
       });
     }
 
-    // Save message to database
-    const newMessage = await Contact.create({
+    // Save to database
+    const savedMessage = await Contact.create({
       name: name.trim(),
       email: email.trim(),
       subject: subject.trim(),
       message: message.trim(),
     });
 
-    // Send confirmation email to visitor
+    console.log("✅ Message saved to SQLite");
+
+    // Send confirmation email
     await sendEmail(
-      email,
+      email.trim(),
       "🎬 Your story has reached us | Coveilla Blog",
-      visitorEmail(name)
+      visitorEmail(name.trim())
     );
 
-    // Notify site owner
+    console.log("✅ Visitor email sent");
+
+    // Notify owner
     await sendEmail(
       process.env.EMAIL_USER,
-      `🎬 New Story Received • ${subject}`,
-      ownerEmail(name, email, subject, message)
+      `🎬 New Contact • ${subject.trim()}`,
+      ownerEmail(
+        name.trim(),
+        email.trim(),
+        subject.trim(),
+        message.trim()
+      )
     );
+
+    console.log("✅ Owner notification sent");
 
     return res.status(201).json({
       success: true,
-      message: "Message sent successfully 💌",
-      data: newMessage,
+      message: "Message sent successfully.",
+      data: savedMessage,
     });
 
   } catch (error) {
-    console.error("CONTACT POST ERROR:", error);
+
+    console.error("=================================");
+    console.error("❌ CONTACT ROUTE ERROR");
+    console.error(error);
+    console.error("=================================");
 
     return res.status(500).json({
       success: false,
-      message: "Server error while sending message",
-      error: error.message,
+      message: error.message || "Server error while sending message.",
     });
   }
 });
 
-// =========================
-// GET ALL CONTACT MESSAGES
-// GET /api/contact
-// =========================
+/* =====================================================
+   GET ALL CONTACT MESSAGES
+   GET /api/contact
+===================================================== */
+
 router.get("/", async (req, res) => {
   try {
+
     const messages = await Contact.findAll({
       order: [["createdAt", "DESC"]],
     });
@@ -78,30 +102,33 @@ router.get("/", async (req, res) => {
     });
 
   } catch (error) {
-    console.error("CONTACT GET ERROR:", error);
+
+    console.error("=================================");
+    console.error("❌ GET CONTACTS ERROR");
+    console.error(error);
+    console.error("=================================");
 
     return res.status(500).json({
       success: false,
-      message: "Server error while fetching messages",
-      error: error.message,
+      message: error.message || "Unable to fetch messages.",
     });
   }
 });
 
-// =========================
-// DELETE CONTACT MESSAGE
-// DELETE /api/contact/:id
-// =========================
+/* =====================================================
+   DELETE CONTACT MESSAGE
+   DELETE /api/contact/:id
+===================================================== */
+
 router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
 
-    const message = await Contact.findByPk(id);
+    const message = await Contact.findByPk(req.params.id);
 
     if (!message) {
       return res.status(404).json({
         success: false,
-        message: "Message not found",
+        message: "Message not found.",
       });
     }
 
@@ -109,16 +136,19 @@ router.delete("/:id", async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Message deleted successfully",
+      message: "Message deleted successfully.",
     });
 
   } catch (error) {
-    console.error("CONTACT DELETE ERROR:", error);
+
+    console.error("=================================");
+    console.error("❌ DELETE CONTACT ERROR");
+    console.error(error);
+    console.error("=================================");
 
     return res.status(500).json({
       success: false,
-      message: "Server error while deleting message",
-      error: error.message,
+      message: error.message || "Unable to delete message.",
     });
   }
 });
