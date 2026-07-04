@@ -40,7 +40,7 @@ function TVSeries() {
         <div className="series-overlay">
 
           <span className="series-badge">
-            NETFLIX STYLE ORIGINAL
+             ORIGINAL TV SERIES
           </span>
 
           <h1>{series.title}</h1>
