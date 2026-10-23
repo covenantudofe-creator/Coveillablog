@@ -1,4 +1,4 @@
-.admin-login-page { min-height: calc(100vh - 70px); display: grid; place-items: center; padding: 40px 18px; background: #f8f6f1; color: #25233a; }
+.admin-login-page { min-height: calc(100vh - var(--site-nav-height, 70px)); min-height: calc(100svh - var(--site-nav-height, 70px)); display: grid; place-items: center; padding: 40px 18px; background: #f8f6f1; color: #25233a; }
 .admin-login-card { display: grid; gap: 15px; width: min(100%, 430px); padding: 38px; border: 1px solid #ece8f1; border-radius: 22px; background: #fff; box-shadow: 0 20px 60px rgba(36,30,60,.1); }
 .admin-login-icon { font-size: 34px; }.admin-login-kicker { color: #86739f; font-size: 11px; font-weight: 800; letter-spacing: .15em; }
 .admin-login-card h1 { font-family: Georgia, serif; font-size: 34px; }.admin-login-card > p:not(.admin-login-kicker):not(.admin-login-error) { color: #777387; font-size: 14px; }

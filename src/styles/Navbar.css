@@ -8,7 +8,7 @@
   left: 0;
 
   width: 100%;
-  height: 70px;
+  height: var(--site-nav-height, 70px);
 
   display: flex;
   align-items: center;
@@ -121,7 +121,7 @@
 @media (max-width: 900px) {
 
   .navbar {
-    height: 68px;
+    height: var(--site-nav-height, 68px);
   }
 
   .logo {
@@ -134,7 +134,7 @@
    MOBILE MENU
 ========================================== */
 
-@media (max-width:768px){
+@media (max-width:920px){
 
   .menu-toggle{
     display:flex;
@@ -144,13 +144,15 @@
 
     position: fixed;
 
-    top: 68px;
-    right: -100%;
+    top: var(--site-nav-height, 70px);
+    right: 0;
+    transform: translateX(110%);
 
     width: 280px;
     max-width: 85vw;
 
-    height: calc(100vh - 68px);
+    height: calc(100vh - var(--site-nav-height, 70px));
+    height: calc(100dvh - var(--site-nav-height, 70px));
 
     display:flex;
     flex-direction:column;
@@ -166,7 +168,7 @@
 
     border-left:1px solid rgba(255,255,255,.08);
 
-    transition:right .35s ease;
+    transition:transform .35s ease;
 
     overflow-y:auto;
 
@@ -174,7 +176,7 @@
   }
 
   .nav-links.active{
-    right:0;
+    transform: translateX(0);
   }
 
   .nav-links a{
@@ -192,7 +194,6 @@
 @media (max-width:480px){
 
   .navbar{
-    height:64px;
     padding:0 18px;
   }
 
@@ -208,14 +209,8 @@
   }
 
   .nav-links{
-
-    top:64px;
-
     width:100%;
     max-width:100%;
-
-    height:calc(100vh - 64px);
-
     padding:30px 24px;
   }
 

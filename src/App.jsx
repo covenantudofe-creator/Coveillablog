@@ -41,7 +41,7 @@ function AppLayout() {
     && !(location.pathname === "/" && (loading || !user));
 
   return (
-    <div className="app">
+    <div className={`app${showSiteChrome ? " has-site-chrome" : ""}`}>
       {showSiteChrome && <Navbar />}
       {showSiteChrome && <FloatingControls />}
       <main>

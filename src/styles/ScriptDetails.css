@@ -14,7 +14,7 @@
 ========================= */
 .top-actions {
   position: fixed;
-  top: 15px;
+  top: calc(var(--site-nav-height, 70px) + 12px);
   left: 0;
   width: 100%;
   display: flex;
@@ -48,6 +48,7 @@
 ========================= */
 .script-hero {
   min-height: 72vh;
+  min-height: 72svh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -60,6 +61,7 @@
 .overlay {
   width: 100%;
   min-height: 72vh;
+  min-height: 72svh;
   display: flex;
   align-items: flex-end;
   background:
@@ -375,7 +377,7 @@
 @media (max-width: 768px) {
   .top-actions {
     padding: 0 14px;
-    top: 12px;
+    top: calc(var(--site-nav-height, 70px) + 12px);
   }
 
   .top-actions button {
@@ -386,6 +388,7 @@
   .script-hero,
   .overlay {
     min-height: 60vh;
+    min-height: 60svh;
   }
 
   .overlay {

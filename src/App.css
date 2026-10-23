@@ -16,12 +16,14 @@
 
 html {
   scroll-behavior: smooth;
+  --site-nav-height: 70px;
 }
 
 html,
 body,
 #root {
   width: 100%;
+  min-width: 0;
   min-height: 100%;
 }
 
@@ -34,7 +36,6 @@ body {
   color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -45,7 +46,9 @@ body {
 
 .app {
   width: 100%;
+  min-width: 0;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   background: #050505;
@@ -58,9 +61,13 @@ body {
 main {
   flex: 1;
   width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  padding-top: 70px; /* Navbar Height */
+}
+
+.app.has-site-chrome > main {
+  padding-top: var(--site-nav-height);
 }
 
 /* ==========================================
@@ -275,6 +282,8 @@ footer {
 
 @media (max-width:900px){
 
+html { --site-nav-height: 68px; }
+
 .grid-3{
 grid-template-columns:repeat(2,1fr);
 }
@@ -282,15 +291,6 @@ grid-template-columns:repeat(2,1fr);
 }
 
 @media (max-width:768px){
-
-main{
-padding-top:65px;
-}
-
-.navbar{
-height:65px;
-padding:0 18px;
-}
 
 .grid-2,
 .grid-3{
@@ -304,6 +304,8 @@ width:min(94%,1200px);
 }
 
 @media (max-width:480px){
+
+html { --site-nav-height: 64px; }
 
 body{
 font-size:15px;

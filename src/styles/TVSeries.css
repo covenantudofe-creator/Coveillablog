@@ -16,7 +16,8 @@
 .series-hero{
     position:relative;
     width:100%;
-    height:85vh;
+    height:clamp(420px, 85vh, 900px);
+    height:clamp(420px, 85svh, 900px);
     overflow:hidden;
 }
 
@@ -216,7 +217,7 @@
 
     font-family:"Courier New", monospace;
 
-    overflow-x:auto;
+    overflow-wrap:anywhere;
 }
 
 /* ==========================================
@@ -227,7 +228,8 @@
 
 .series-hero{
 
-height:70vh;
+height:clamp(380px,70vh,760px);
+height:clamp(380px,70svh,760px);
 }
 
 .series-overlay{
@@ -262,7 +264,8 @@ font-size:.92rem;
 
 .series-hero{
 
-height:60vh;
+height:clamp(340px,60vh,650px);
+height:clamp(340px,60svh,650px);
 }
 
 .series-overlay{
