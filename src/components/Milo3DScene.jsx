@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import MiloMoonIllustration from "./MiloMoonIllustration";
 
 /**
  * Creates standard toon/story-shaded materials.
@@ -1124,15 +1125,7 @@ export default function Milo3DScene({
     mouse: { x: 0, y: 0, targetX: 0, targetY: 0 },
   });
 
-  const [webGLSupported] = useState(() => {
-    if (typeof window === "undefined") return false;
-    try {
-      const testCanvas = document.createElement("canvas");
-      return Boolean(testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl"));
-    } catch {
-      return false;
-    }
-  });
+  const [renderError, setRenderError] = useState(false);
 
   useEffect(() => {
     stateRef.current.talking = talking;
@@ -1145,7 +1138,8 @@ export default function Milo3DScene({
 
   useEffect(() => {
     const container = mountRef.current;
-    if (!container || !webGLSupported) return undefined;
+    if (!container) return undefined;
+    setRenderError(false);
 
     const width = container.clientWidth || 960;
     const height = container.clientHeight || 540;
@@ -1173,16 +1167,31 @@ export default function Milo3DScene({
 
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+      const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
+      renderer = new THREE.WebGLRenderer({
+        antialias: !isSmallScreen,
+        alpha: true,
+        powerPreference: "low-power",
+      });
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isSmallScreen ? 1 : 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.15;
       container.innerHTML = "";
       container.appendChild(renderer.domElement);
     } catch {
+      renderer?.dispose();
+      // This state change only runs on the exceptional WebGL setup-failure path.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setRenderError(true);
       return undefined;
     }
+
+    const onContextLost = (event) => {
+      event.preventDefault();
+      setRenderError(true);
+    };
+    renderer.domElement.addEventListener("webglcontextlost", onContextLost);
 
     // Lights
     const ambient = new THREE.AmbientLight(0xffedd5, 0.95);
@@ -1313,8 +1322,9 @@ export default function Milo3DScene({
     resizeObserver.observe(container);
 
     // Animation variables
-    let animId;
-    const clock = new THREE.Clock();
+    let animId = null;
+    let isInView = false;
+    const clock = new THREE.Clock(false);
     let blinkTimer = 3.0;
     let isBlinking = false;
     let blinkProgress = 0;
@@ -1568,12 +1578,38 @@ export default function Milo3DScene({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const updateAnimationState = () => {
+      const shouldAnimate = isInView && !document.hidden;
+      if (shouldAnimate && animId === null) {
+        clock.start();
+        animate();
+      } else if (!shouldAnimate && animId !== null) {
+        cancelAnimationFrame(animId);
+        animId = null;
+        clock.stop();
+      }
+    };
+    const visibilityObserver = typeof IntersectionObserver === "undefined"
+      ? null
+      : new IntersectionObserver(([entry]) => {
+        isInView = entry.isIntersecting;
+        updateAnimationState();
+      });
+    if (visibilityObserver) {
+      visibilityObserver.observe(container);
+    } else {
+      isInView = true;
+      updateAnimationState();
+    }
+    document.addEventListener("visibilitychange", updateAnimationState);
 
     return () => {
       cancelAnimationFrame(animId);
+      visibilityObserver?.disconnect();
+      document.removeEventListener("visibilitychange", updateAnimationState);
       window.removeEventListener("pointermove", onPointerMove);
       resizeObserver.disconnect();
+      renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
 
       scene.traverse((obj) => {
         if (obj.isMesh) {
@@ -1592,12 +1628,12 @@ export default function Milo3DScene({
         }
       }
     };
-  }, [sceneId, webGLSupported, zoomLevel]);
+  }, [sceneId, zoomLevel, renderError]);
 
-  if (!webGLSupported) {
+  if (renderError) {
     return (
-      <div className="milo-3d-fallback" role="img" aria-label="3D animation unavailable">
-        <p>WebGL is required for 3D cartoon animations. Displaying visual fallback.</p>
+      <div className="milo-3d-fallback" role="img" aria-label="Animated story artwork fallback">
+        <MiloMoonIllustration sceneId={sceneId} />
       </div>
     );
   }

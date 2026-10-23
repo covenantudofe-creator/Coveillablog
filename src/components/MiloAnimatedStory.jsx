@@ -7,36 +7,6 @@ const femaleVoiceRegex = /female|woman|samantha|zira|aria|jenny|susan|linda|kare
 const maleVoiceRegex = /male|man|daniel|david|george|james|oliver|junior|alex|tom|guy/i;
 const editableTarget = "input, select, textarea, [contenteditable='true']";
 
-// Gentle client-side ambient lullaby chime for the intro
-function playIntroChime(ctxRef) {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    if (!ctxRef.current) ctxRef.current = new AudioCtx();
-    const ctx = ctxRef.current;
-    if (ctx.state === "suspended") ctx.resume();
-
-    const notes = [261.63, 329.63, 392.00, 440.00, 523.25]; // C, E, G, A, C chime
-    notes.forEach((freq, idx) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.65);
-
-      gain.gain.setValueAtTime(0.0001, ctx.currentTime + idx * 0.65);
-      gain.gain.exponentialRampToValueAtTime(0.06, ctx.currentTime + idx * 0.65 + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.65 + 2.0);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(ctx.currentTime + idx * 0.65);
-      osc.stop(ctx.currentTime + idx * 0.65 + 2.2);
-    });
-  } catch {
-    // Graceful fallback
-  }
-}
-
 export default function MiloAnimatedStory() {
   const [storyStage, setStoryStage] = useState("intro"); // "intro", "story", "ending"
   const [sceneIndex, setSceneIndex] = useState(0);
@@ -62,15 +32,6 @@ export default function MiloAnimatedStory() {
 
   const cancelSpeechRef = useRef(false);
   const lineTimerRef = useRef(null);
-  const audioCtxRef = useRef(null);
-
-  // Play gentle intro chime on mount if audio is enabled
-  useEffect(() => {
-    if (storyStage === "intro" && audioEnabled) {
-      playIntroChime(audioCtxRef);
-    }
-  }, [storyStage, audioEnabled]);
-
   // Load available browser voices
   useEffect(() => {
     if (!speechAvailable) return undefined;
@@ -249,6 +210,7 @@ export default function MiloAnimatedStory() {
       utterance.onerror = (e) => {
         if (cancelSpeechRef.current || e.error === "canceled" || e.error === "interrupted") return;
         setIsSpeaking(false);
+        setSpeechMessage("Voice playback is unavailable. The story will continue with captions.");
         currentLineIdx += 1;
         lineTimerRef.current = setTimeout(playNextLine, 400);
       };

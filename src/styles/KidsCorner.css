@@ -156,6 +156,8 @@
 @media (max-width: 620px) {
   .milo-player { padding: 15px; }
   .milo-player-screen { border-radius: 11px; }
+  .milo-player-screen:has(.milo-3d-canvas-wrap) { min-height: 460px; aspect-ratio: 4 / 5; }
+  .milo-player-screen .milo-3d-canvas-wrap { min-height: 0; }
   .milo-player-screen .milo-photo-scene { aspect-ratio: 4 / 5; }
   .milo-glass-controls { gap: 5px; min-height: 54px; padding: 6px; }
   .milo-player .milo-glass-controls button { min-width: 34px; min-height: 36px; padding: 5px 9px; font-size: 12px; }
