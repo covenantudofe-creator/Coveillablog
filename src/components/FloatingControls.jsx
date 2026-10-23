@@ -5,6 +5,10 @@ const FloatingControls = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  if (location.pathname === "/kids" || location.pathname === "/sign-in") {
+    return null;
+  }
+
   const showBack = location.pathname !== "/";
 
   const scrollToTop = () => {

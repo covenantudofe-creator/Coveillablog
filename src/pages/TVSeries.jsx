@@ -7,6 +7,7 @@ function TVSeries() {
   const series = scripts.find(
     (item) => item.type === "tv-series"
   );
+  const [selectedEpisode, setSelectedEpisode] = useState(() => series?.episodes?.[0] || null);
 
   // Safety check
   if (!series) {
@@ -19,10 +20,6 @@ function TVSeries() {
       </main>
     );
   }
-
-  const [selectedEpisode, setSelectedEpisode] = useState(
-    series.episodes[0]
-  );
 
   return (
     <main className="tv-series-page">

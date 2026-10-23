@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/About.css";
 import aboutImage from "../assets/Imageportfolio.jpg";
 
@@ -26,6 +25,7 @@ function About() {
             src={aboutImage}
             alt="Godscovenant Patrick Udofe"
             className="about-hero-image"
+            fetchPriority="high"
           />
         </div>
       </section>

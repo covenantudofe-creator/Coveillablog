@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "db:migrate:reader-auth": "node scripts/migrate-reader-password-auth.js",
+    "test": "node --test --test-force-exit tests"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +19,14 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "google-auth-library": "^10.3.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.7.1",
     "nodemailer": "^9.0.1",
-    "sequelize": "^6.37.8",
-    "sqlite3": "^5.1.7"
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "supertest": "^7.1.4"
   }
 }

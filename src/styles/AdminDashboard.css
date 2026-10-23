@@ -1,0 +1,8 @@
+.admin-page { width: min(1100px, 92%); margin: 28px auto; color: #242332; }
+.admin-page > h1 { margin: 12px 0; font-family: Georgia, serif; }
+.admin-page > p { margin: 12px 0 22px; }
+.admin-page > p a, .admin-page td a { color: #705194; font-weight: 700; }
+.admin-page table { width: 100%; border-collapse: collapse; background: white; }
+.admin-page th, .admin-page td { padding: 12px; border-bottom: 1px solid #e9e5ed; text-align: left; }
+.admin-page th { background: #f3eff7; }
+.admin-page td button { margin-left: 12px; color: #b52f3c; }

@@ -1,32 +1,11 @@
 import { useEffect, useState } from "react";
+import { apiRequest } from "../auth/api";
 import "../styles/AdminMessages.css";
-
-const API_URL = "http://localhost:5055";
 
 function AdminMessages() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  const fetchMessages = async () => {
-    try {
-      setLoading(true);
-      setError("");
-
-      const res = await fetch(`${API_URL}/api/contact`);
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to fetch messages");
-      }
-
-      setMessages(data.data || []);
-    } catch (err) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
@@ -36,15 +15,9 @@ function AdminMessages() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`${API_URL}/api/contact/${id}`, {
+      await apiRequest(`/api/contact/${id}`, {
         method: "DELETE",
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to delete message");
-      }
 
       setMessages((prev) => prev.filter((msg) => msg.id !== id));
     } catch (err) {
@@ -53,7 +26,12 @@ function AdminMessages() {
   };
 
   useEffect(() => {
-    fetchMessages();
+    let active = true;
+    apiRequest("/api/contact")
+      .then((data) => { if (active) setMessages(data.data || []); })
+      .catch((err) => { if (active) setError(err.message || "Something went wrong"); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
   }, []);
 
   return (

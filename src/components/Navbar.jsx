@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/useAuth";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut();
+    setMenuOpen(false);
+    navigate("/sign-in", { replace: true });
+  };
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -79,6 +88,10 @@ const Navbar = () => {
           TV Series
         </Link>
 
+        <Link to="/kids" onClick={closeMenu}>
+          Kids’ Corner
+        </Link>
+
         <Link to="/articles" onClick={closeMenu}>
           Articles
         </Link>
@@ -90,6 +103,12 @@ const Navbar = () => {
         <Link to="/contact" onClick={closeMenu}>
           Contact
         </Link>
+
+        {user ? (
+          <button className="auth-nav-button" type="button" onClick={handleSignOut}>Sign out</button>
+        ) : (
+          <Link to="/sign-in" onClick={closeMenu}>Sign in</Link>
+        )}
       </nav>
 
     </header>

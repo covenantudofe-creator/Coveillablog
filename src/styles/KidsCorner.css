@@ -1,0 +1,865 @@
+.kids-page { --kid-ink: #292844; color: var(--kid-ink); background: #fffaf1; padding-bottom: 58px; }
+.cartoon-stage { min-height: 505px; height: min(66vw, 620px); max-height: 620px; position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #837ce2 0%, #b6b4f4 55%, #f8c5b9 100%); }
+.cartoon-stage::before { position: absolute; z-index: -1; top: -20%; left: 18%; width: 64%; height: 115%; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; content: ""; transform: rotate(-18deg); }
+.scene-garden { background: linear-gradient(180deg, #78c7c7 0%, #c4efce 58%, #ffe5a9 100%); }
+.scene-space { background: linear-gradient(180deg, #252b73 0%, #564999 63%, #c184b8 100%); }
+.stage-stars { position: absolute; inset: 9% 12% auto; z-index: 1; color: rgba(255,255,255,.9); font-size: 20px; letter-spacing: 20px; animation: star-shimmer 3s ease-in-out infinite; }
+.stage-cloud { position: absolute; z-index: 1; font-size: clamp(48px, 7vw, 84px); opacity: .9; filter: drop-shadow(0 8px 10px rgba(70,57,110,.08)); animation: cloud-drift 8s ease-in-out infinite alternate; }
+.cloud-left { top: 24%; left: 9%; }.cloud-right { top: 17%; right: 10%; animation-delay: -3s; }
+.stage-orbit { position: absolute; z-index: 2; top: 14%; right: 25%; display: grid; width: 96px; height: 96px; place-items: center; border-radius: 50%; background: #ffeda9; box-shadow: 0 0 70px rgba(255,236,155,.58); font-size: 53px; animation: orbit-pulse 4s ease-in-out infinite; }
+.scene-garden .stage-orbit { top: 26%; right: 22%; width: 70px; height: 70px; background: #fff0ba; font-size: 39px; }
+.scene-space .stage-orbit { background: #efd3ff; box-shadow: 0 0 70px rgba(202,163,255,.6); }
+.stage-character { position: absolute; z-index: 4; top: 36%; left: 50%; font-size: clamp(112px, 17vw, 190px); line-height: 1; filter: drop-shadow(0 20px 12px rgba(49,42,86,.19)); transform: translateX(-50%); animation: character-float 3.2s ease-in-out infinite; }
+.is-playing .stage-character { animation: character-hop .75s ease-in-out infinite alternate; }
+.stage-hill { position: absolute; z-index: 2; bottom: -16%; width: 76%; height: 40%; border-radius: 50% 50% 0 0; }
+.hill-back { left: -12%; background: #95c7aa; transform: rotate(5deg); }
+.hill-front { right: -16%; bottom: -19%; width: 83%; height: 38%; background: #78ad91; transform: rotate(-4deg); }
+.scene-garden .hill-back { background: #8dd09c; }.scene-garden .hill-front { background: #55af78; }
+.scene-space .hill-back { background: #57539e; }.scene-space .hill-front { background: #383b7f; }
+.stage-caption { position: absolute; z-index: 5; left: max(7%, calc((100% - 1120px) / 2)); bottom: 11%; color: white; text-shadow: 0 2px 20px rgba(40,34,82,.28); }
+.kids-pill { display: inline-block; padding: 7px 12px; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; background: rgba(255,255,255,.15); font-size: 10px; font-weight: 900; letter-spacing: .13em; }
+.stage-caption h1 { margin-top: 12px; font-family: Georgia, serif; font-size: clamp(36px, 6vw, 66px); line-height: 1.04; }
+.stage-caption p { margin-top: 7px; color: rgba(255,255,255,.86); font-size: 15px; }
+.story-play { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; padding: 12px 19px; border-radius: 99px; background: #fff; color: #4f4388; box-shadow: 0 8px 24px rgba(36,30,74,.16); font-size: 13px; font-weight: 800; transition: transform .2s, box-shadow .2s; }
+.story-play:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(36,30,74,.23); }
+.story-play span { font-size: 11px; }
+.story-read-link { display: inline-flex; align-items: center; gap: 8px; margin: 22px 0 0 12px; padding: 12px 17px; border: 1px solid rgba(255,255,255,.68); border-radius: 99px; background: rgba(42, 36, 73, .2); color: #fff; font-size: 13px; font-weight: 800; text-decoration: none; text-shadow: 0 1px 8px rgba(40,34,82,.35); }
+.story-read-link:hover { background: rgba(42, 36, 73, .38); }
+.stage-bubble { position: absolute; z-index: 3; color: #fff3aa; font-size: 24px; animation: bubble-up 4s ease-in-out infinite; }.bubble-one { top: 47%; left: 29%; }.bubble-two { top: 55%; right: 29%; color: #ffd2db; animation-delay: 1.2s; }
+.kids-content { width: min(1120px, 90%); margin: 0 auto; padding-top: 58px; }
+.kids-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 25px; }
+.kids-overline { color: #9b77c4; font-size: 10px; font-weight: 900; letter-spacing: .18em; }
+.kids-heading h2 { margin-top: 4px; font-family: Georgia, serif; font-size: clamp(25px, 4vw, 35px); line-height: 1.2; }
+.kids-heading p { max-width: 260px; color: #878294; font-size: 13px; }
+.story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.story-card { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 15px; border: 2px solid transparent; border-radius: 20px; color: var(--kid-ink); text-align: left; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.story-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(59,47,79,.09); }.story-card.selected { border-color: #a88bd1; box-shadow: 0 8px 22px rgba(97,68,142,.1); }
+.story-card.peach { background: #ffeadb; }.story-card.mint { background: #e1f4df; }.story-card.lilac { background: #ebe5ff; }
+.story-emoji { display: grid; flex: 0 0 54px; width: 54px; height: 54px; place-items: center; border-radius: 16px; background: rgba(255,255,255,.68); font-size: 30px; }
+.story-card-copy { display: grid; min-width: 0; gap: 3px; }.story-card-copy strong { font-size: 13px; }.story-card-copy small { color: #827b8e; font-size: 11px; }
+.story-arrow { margin-left: auto; color: #8871ac; font-size: 18px; }
+.milo-story { margin-top: 42px; padding: clamp(20px, 4.5vw, 48px); border: 1px solid rgba(120, 99, 151, .14); border-radius: 26px; background: #fff; box-shadow: 0 14px 38px rgba(59, 47, 79, .07); }
+.milo-story-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 250px); align-items: center; gap: clamp(24px, 5vw, 58px); padding-bottom: 34px; border-bottom: 1px solid #eee8f2; }
+.milo-story-intro h2 { margin-top: 8px; color: #302b49; font-family: Georgia, serif; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.08; }
+.milo-story-subtitle { max-width: 600px; margin-top: 13px; color: #756786; font-family: Georgia, serif; font-size: clamp(17px, 2.5vw, 22px); line-height: 1.45; }
+.milo-story-byline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 20px; color: #655779; font-size: 13px; }
+.milo-story-byline span { padding-left: 12px; border-left: 1px solid #d7cedf; color: #8d8298; }
+.milo-story-cover { position: relative; min-height: 205px; overflow: hidden; border-radius: 22px; background: linear-gradient(165deg, #34345f 0%, #6664a4 56%, #f2bdb0 100%); isolation: isolate; }
+.milo-story-cover::before { position: absolute; z-index: -1; right: -12%; bottom: -48%; left: -12%; height: 78%; border-radius: 50% 50% 0 0; background: #77739d; content: ""; }
+.milo-cover-moon { position: absolute; top: 17%; right: 18%; width: 78px; aspect-ratio: 1; border-radius: 50%; background: #fff0b5; box-shadow: 0 0 48px rgba(255, 240, 181, .55); }
+.milo-cover-bear { position: absolute; bottom: 12%; left: 14%; z-index: 1; font-size: 76px; filter: drop-shadow(0 8px 8px rgba(37, 31, 69, .2)); }
+.milo-cover-star { position: absolute; color: #fff4c6; }.milo-cover-star.star-a { top: 18%; left: 20%; font-size: 20px; }.milo-cover-star.star-b { top: 42%; right: 13%; font-size: 31px; }
+.milo-chapter-nav { margin: 28px 0 8px; padding: 20px 22px; border-radius: 18px; background: #f7f3fb; }
+.milo-player { margin-top: 28px; padding: clamp(16px, 3vw, 28px); border: 1px solid #e9e1f0; border-radius: 20px; background: #fbf9ff; }
+.milo-player-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+.milo-player-heading h3 { margin-top: 4px; color: #39314c; font-family: Georgia, serif; font-size: clamp(22px, 3vw, 29px); }
+.milo-scene-count { flex: 0 0 auto; padding: 7px 11px; border-radius: 99px; background: #efe9f7; color: #66517f; font-size: 12px; font-weight: 800; }
+.milo-illustration-wrap, .milo-scene-coming { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 16px; background: #18264c; }
+.milo-scene-art { display: block; width: 100%; height: 100%; }
+.milo-star { animation: milo-twinkle 5s ease-in-out infinite alternate; }
+.milo-star:nth-of-type(even) { animation-delay: -2.5s; }
+.milo-cloud { animation: milo-drift 24s ease-in-out infinite alternate; }
+.milo-cloud-late { animation-delay: -12s; }
+.milo-boy { transform-box: fill-box; transform-origin: center bottom; animation: milo-breathe 5s ease-in-out infinite; }
+.milo-scene-coming { display: grid; align-content: center; justify-items: center; gap: 10px; padding: 24px; background: linear-gradient(155deg, #1a2852, #4c427c); color: #fff9df; text-align: center; }
+.milo-coming-moon { width: clamp(48px, 9vw, 76px); aspect-ratio: 1; margin-bottom: 4px; border-radius: 50%; background: #fff0b2; box-shadow: 0 0 34px rgba(255,240,178,.32); }
+.milo-scene-coming strong { font-family: Georgia, serif; font-size: clamp(20px, 3vw, 27px); }
+.milo-scene-coming span:last-child { max-width: 400px; color: #e1dcef; font-size: 13px; line-height: 1.5; }
+.milo-player-copy { min-height: 95px; padding: 17px 3px 8px; }
+.milo-player-copy h4 { color: #40364f; font-family: Georgia, serif; font-size: 21px; }
+.milo-player-copy p { margin-top: 8px; color: #61596a; font-size: 15px; line-height: 1.7; }
+.milo-player-copy .milo-narration { animation: milo-narration-arrive .65s ease-out both; }
+.milo-player-copy .milo-scene-status, .milo-speech-message { color: #827b8e; font-size: 12px; }
+.milo-dialogue { display: grid; gap: 8px; margin-top: 12px; padding: 13px 15px; border-left: 3px solid #a88bd1; border-radius: 0 12px 12px 0; background: #f2edf8; }
+.milo-dialogue p { margin: 0; color: #55476a; font-size: 14px; line-height: 1.6; }
+.milo-voice-select { display: grid; gap: 7px; width: min(100%, 420px); margin-top: 13px; color: #55456b; font-size: 12px; font-weight: 800; }
+.milo-voice-select span { color: #827b8e; font-weight: 400; }
+.milo-voice-select select { min-height: 42px; padding: 8px 12px; border: 1px solid #d9cde6; border-radius: 10px; background: #fff; color: #40364f; font: inherit; font-weight: 500; }
+.milo-progress-label { display: flex; justify-content: space-between; margin: 10px 0 6px; color: #756786; font-size: 12px; font-weight: 700; }
+.milo-progress { display: block; width: 100%; height: 8px; overflow: hidden; border: 0; border-radius: 99px; accent-color: #8066a6; }
+.milo-player-controls { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+.milo-player-controls button { min-height: 42px; padding: 9px 14px; border: 1px solid #d9cde6; border-radius: 99px; background: #fff; color: #55456b; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.milo-player-controls button:hover:not(:disabled) { background: #f0eaf7; }
+.milo-player-controls button:disabled { cursor: not-allowed; opacity: .48; }
+.milo-player-controls .milo-play-toggle { border-color: #765b9a; background: #765b9a; color: white; }
+.milo-player button:focus-visible { outline: 3px solid #765b9a; outline-offset: 3px; }
+.milo-speech-message { margin-top: 10px; }
+.milo-player { --milo-red: #e50914; --milo-black: #141414; position: relative; overflow: hidden; border-color: #343438; background: linear-gradient(145deg, #171719, #0f0f11 70%); color: #f5f2f4; box-shadow: 0 20px 55px rgba(10, 9, 12, .28), 0 0 0 1px rgba(229, 9, 20, .08); }
+.milo-player .kids-overline { color: #f05a62; }
+.milo-player-heading h3 { color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: clamp(23px, 3vw, 31px); font-weight: 800; letter-spacing: -.03em; }
+.milo-player .milo-scene-count { border: 1px solid #46464a; background: #252528; color: #f7f4f5; }
+.milo-player-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid #39393d; border-radius: 15px; background: #0e142c; box-shadow: 0 12px 32px rgba(0, 0, 0, .38), 0 0 25px rgba(229, 9, 20, .08); isolation: isolate; }
+.milo-player-screen:has(.milo-photo-scene) { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto; aspect-ratio: auto; }
+.milo-player .milo-scene-art, .milo-player .milo-scene-coming { display: block; width: 100%; height: 100%; }
+.milo-player-screen .milo-photo-scene { position: relative; inset: auto; display: grid; width: 100%; aspect-ratio: 16 / 9; place-items: center; overflow: hidden; margin: 0; background: #101014; }
+.milo-photo-backdrop { position: absolute; inset: -24px; background-image: var(--milo-photo); background-position: center; background-size: cover; filter: blur(17px) brightness(.38) saturate(.82); transform: scale(1.05); }
+.milo-photo-image { position: relative; z-index: 1; display: block; width: auto; max-width: 100%; height: 100%; object-fit: contain; object-position: center; filter: drop-shadow(0 9px 24px rgba(0,0,0,.4)); animation: photo-drift 15s ease-in-out infinite alternate; }
+.scene-photo-milo-loses-mom .milo-photo-image { filter: grayscale(.16) brightness(.84) drop-shadow(0 9px 24px rgba(0,0,0,.4)); }
+.scene-photo-dear-moon .milo-photo-image { filter: brightness(.9) drop-shadow(0 9px 24px rgba(0,0,0,.4)); }
+.milo-player .milo-scene-coming { background: radial-gradient(ellipse at 72% 24%, rgba(255, 240, 178, .2), transparent 24%), linear-gradient(155deg, #121a35, #29223e 70%, #111); color: #fff; }
+.milo-player .milo-scene-coming strong { font: 800 clamp(22px, 4vw, 39px)/1.15 Arial, sans-serif; }
+.milo-player .milo-scene-coming span:last-child { color: #ccc7d1; }
+.milo-screen-caption { position: absolute; z-index: 2; right: 0; bottom: 72px; left: 0; padding: 42px 22px 12px; background: linear-gradient(0deg, rgba(8, 8, 10, .83), transparent); color: #fff; pointer-events: none; }
+.milo-player-screen:has(.milo-photo-scene) .milo-screen-caption { position: relative; inset: auto; padding: 12px 18px; background: #141416; }
+.milo-screen-caption span { color: #ff6971; font-size: 10px; font-weight: 900; letter-spacing: .16em; }
+.milo-screen-caption h4 { margin-top: 4px; font: 700 clamp(16px, 2.6vw, 23px)/1.25 Arial, sans-serif; }
+.milo-glass-controls { position: absolute; z-index: 3; right: 0; bottom: 0; left: 0; display: flex; align-items: center; gap: 10px; min-height: 66px; padding: 10px 14px; border-top: 1px solid rgba(255,255,255,.1); background: rgba(14, 14, 17, .78); backdrop-filter: blur(14px); }
+.milo-player-screen:has(.milo-photo-scene) .milo-glass-controls { position: relative; inset: auto; }
+.milo-player .milo-glass-controls button { display: grid; flex: 0 0 auto; min-width: 40px; min-height: 40px; place-items: center; padding: 6px 12px; border: 1px solid #55555b; border-radius: 99px; background: rgba(44, 44, 48, .82); color: #fff; font: 700 14px/1 Arial, sans-serif; cursor: pointer; }
+.milo-player .milo-glass-controls button:hover:not(:disabled) { border-color: #fff; background: rgba(80,80,84,.9); }
+.milo-player .milo-glass-controls button:disabled { cursor: not-allowed; opacity: .4; }
+.milo-player .milo-glass-controls .milo-play-toggle { min-width: 44px; min-height: 44px; border-color: #fff; background: #fff; color: #171719; font-size: 17px; }
+.milo-player .milo-glass-controls .milo-scene-count { margin-left: auto; white-space: nowrap; }
+.milo-player .milo-progress-label { color: #c8c5ca; }
+.milo-player .milo-progress { height: 5px; background: #37373a; accent-color: var(--milo-red); }
+.milo-player .milo-progress::-webkit-progress-bar { border-radius: 99px; background: #37373a; }
+.milo-player .milo-progress::-webkit-progress-value { border-radius: 99px; background: var(--milo-red); }
+.milo-player .milo-progress::-moz-progress-bar { border-radius: 99px; background: var(--milo-red); }
+.milo-player-copy { min-height: 0; padding: 16px 2px 8px; }
+.milo-player-copy .milo-narration, .milo-player-copy p { color: #e4e0e5; font-family: Georgia, serif; font-size: clamp(15px, 1.7vw, 18px); line-height: 1.75; }
+.milo-player .milo-dialogue { gap: 6px; margin-top: 13px; padding: 0 0 0 14px; border-color: var(--milo-red); border-radius: 0; background: transparent; }
+.milo-player .milo-dialogue p { color: #ded9df; font-family: Arial, sans-serif; font-size: 14px; }
+.milo-player .milo-dialogue strong { color: #ff737b; }
+.milo-player-copy .milo-scene-status, .milo-player .milo-speech-message { color: #aaa5ae; font-family: Arial, sans-serif; font-size: 12px; }
+.milo-voice-panel { margin-top: 14px; border: 1px solid #37373b; border-radius: 12px; background: #1b1b1e; color: #f2eff3; }
+.milo-voice-panel summary { padding: 12px 15px; color: #fff; font-size: 13px; font-weight: 800; cursor: pointer; }
+.milo-voice-grid { display: grid; grid-template-columns: minmax(180px, 1.4fr) repeat(2, minmax(130px, 1fr)); gap: 15px; padding: 0 15px 15px; }
+.milo-voice-grid label { display: grid; gap: 8px; color: #e5e1e7; font-size: 12px; font-weight: 700; }
+.milo-voice-grid label output { color: #c7c1ca; font-weight: 500; }
+.milo-voice-grid select { min-height: 38px; padding: 7px 10px; border: 1px solid #535158; border-radius: 8px; background: #111113; color: #fff; font: inherit; }
+.milo-voice-grid input[type="range"] { width: 100%; accent-color: var(--milo-red); }
+.milo-voice-grid p { grid-column: 1 / -1; margin: 0; color: #aaa5ae; font-size: 11px; line-height: 1.5; }
+.milo-scene-row { display: grid; grid-auto-columns: minmax(155px, 1fr); grid-auto-flow: column; gap: 10px; overflow-x: auto; margin-top: 18px; padding: 2px 2px 10px; scrollbar-color: #555 #1a1a1d; }
+.milo-scene-row button { display: grid; align-content: start; gap: 5px; min-height: 92px; padding: 12px; border: 1px solid #38383c; border-radius: 10px; background: #202023; color: #d5d1d8; text-align: left; cursor: pointer; }
+.milo-scene-row button:hover { background: #2a2a2e; }
+.milo-scene-row button.is-current { border-color: var(--milo-red); background: linear-gradient(140deg, #322125, #222124 72%); box-shadow: inset 0 0 0 1px rgba(229,9,20,.24); color: #fff; }
+.milo-scene-row button span { color: #ff646d; font-size: 10px; font-weight: 900; letter-spacing: .12em; }
+.milo-scene-row button strong { font-size: 12px; line-height: 1.35; }
+.milo-scene-row button small { color: #aaa5ae; font-size: 10px; }
+.milo-shortcut-help { margin-top: 11px; color: #9d98a1; font-size: 11px; }
+.milo-player :focus-visible { outline: 3px solid #ff6871; outline-offset: 3px; }
+.milo-player:focus-visible { outline: 3px solid #ff6871; outline-offset: 3px; }
+.milo-player .milo-boy { transform-box: fill-box; transform-origin: center bottom; animation: milo-breathe 5.2s ease-in-out infinite, milo-tilt 8s ease-in-out infinite; }
+.milo-player .mara-girl { transform-box: fill-box; transform-origin: center bottom; animation: milo-breathe 5.6s ease-in-out infinite, mara-tilt 9s ease-in-out infinite; }
+.milo-player .milo-blink { transform-box: fill-box; transform-origin: center; animation: milo-blink 6.7s linear infinite; }
+.milo-player .milo-mouth > * { opacity: 0; }
+.milo-player .milo-mouth .mouth-closed { opacity: 1; }
+.milo-player .milo-mouth.is-talking .mouth-closed, .milo-player .milo-mouth.is-talking .mouth-smile { opacity: 0; }
+.milo-player .milo-mouth.is-talking .mouth-open { animation: mouth-open-close .44s steps(1, end) infinite; }
+.milo-player .milo-mouth.is-talking .mouth-wide { animation: mouth-wide-close .44s steps(1, end) infinite; }
+@keyframes mouth-open-close { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes mouth-wide-close { 0%, 49% { opacity: 0; } 50%, 100% { opacity: 1; } }
+@keyframes milo-blink { 0%, 94%, 97%, 100% { transform: scaleY(0); } 95%, 96% { transform: scaleY(1); } }
+@keyframes milo-tilt { 0%, 100% { rotate: 0deg; } 50% { rotate: 1deg; } }
+@keyframes mara-tilt { 0%, 100% { rotate: 0deg; } 50% { rotate: -1deg; } }
+
+@media (max-width: 620px) {
+  .milo-player { padding: 15px; }
+  .milo-player-screen { border-radius: 11px; }
+  .milo-player-screen .milo-photo-scene { aspect-ratio: 4 / 5; }
+  .milo-glass-controls { gap: 5px; min-height: 54px; padding: 6px; }
+  .milo-player .milo-glass-controls button { min-width: 34px; min-height: 36px; padding: 5px 9px; font-size: 12px; }
+  .milo-player .milo-glass-controls .milo-play-toggle { min-width: 38px; min-height: 38px; }
+  .milo-player .milo-glass-controls .milo-scene-count { display: none; }
+  .milo-screen-caption { bottom: 55px; padding: 26px 12px 8px; }
+  .milo-voice-grid { grid-template-columns: 1fr; }
+  .milo-voice-grid p { grid-column: auto; }
+  .milo-scene-row { grid-auto-columns: minmax(140px, 42vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milo-player .milo-boy, .milo-player .mara-girl, .milo-player .milo-blink,
+  .milo-player .milo-mouth.is-talking .mouth-open, .milo-player .milo-mouth.is-talking .mouth-wide { animation: none; }
+  .milo-player .milo-mouth.is-talking .mouth-open { opacity: 1; }
+  .milo-player .milo-mouth.is-talking .mouth-wide { opacity: 0; }
+  .milo-scene-row button { scroll-behavior: auto; }
+}
+.milo-chapter-nav h3 { color: #4d4162; font-family: Georgia, serif; font-size: 18px; }
+.milo-chapter-nav ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 24px; margin-top: 12px; padding-left: 22px; }
+.milo-chapter-nav li { color: #89799d; font-size: 13px; }
+.milo-chapter-nav a { color: #695382; text-decoration: underline; text-decoration-color: #c9bdd8; text-underline-offset: 3px; }
+.milo-chapter-nav a:hover { color: #47345e; }
+.milo-chapter { max-width: 760px; margin: 38px auto 0; scroll-margin-top: 24px; }
+.milo-chapter h3 { display: grid; gap: 7px; margin-bottom: 18px; color: #39314c; font-family: Georgia, serif; font-size: clamp(24px, 3.5vw, 31px); line-height: 1.25; }
+.milo-chapter h3 span { color: #a07cba; font-family: Arial, sans-serif; font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.milo-chapter p { margin-top: 13px; color: #514b5e; font-size: 16px; line-height: 1.85; }
+.milo-learning-sections { display: grid; gap: 18px; margin-top: 52px; padding-top: 34px; border-top: 1px solid #eee8f2; }
+.milo-learning-card { padding: clamp(20px, 3vw, 30px); border: 1px solid rgba(120, 99, 151, .13); border-radius: 20px; background: #fcfaff; }
+.milo-learning-card h3 { color: #40364f; font-family: Georgia, serif; font-size: clamp(21px, 3vw, 27px); line-height: 1.25; }
+.milo-learning-card p, .milo-learning-card li { color: #61596a; font-size: 14px; line-height: 1.75; }
+.milo-learning-card ul, .milo-learning-card ol { display: grid; gap: 8px; margin-top: 14px; padding-left: 22px; }
+.milo-lesson { background: #f2f8f1; }.milo-activities { background: #fffaf0; }.milo-adult-note { background: #f5f3fb; }
+.milo-activity-note { max-width: 720px; margin-top: 8px; }
+.milo-activity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; margin-top: 18px; }
+.milo-activity { min-width: 0; padding: 18px; border: 1px solid rgba(140, 119, 158, .15); border-radius: 16px; background: rgba(255, 255, 255, .82); }
+.milo-activity-icon { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 12px; background: #f1eafd; color: #775d97; font-size: 20px; }
+.milo-activity h4 { margin-top: 10px; color: #4d4162; font-size: 15px; line-height: 1.4; }
+.milo-activity p { margin-top: 7px; }
+.milo-drawing-space { min-height: 150px; margin-top: 13px; border: 1px dashed #b9a9c9; border-radius: 12px; background: repeating-linear-gradient(0deg, transparent 0 30px, rgba(185, 169, 201, .23) 30px 31px); }
+.milo-fiction-note { padding: 16px 19px; border-left: 3px solid #b7a2cc; border-radius: 0 12px 12px 0; background: #f8f5fa; color: #746b7b; font-size: 12px; line-height: 1.7; }
+.milo-story a:focus-visible { outline: 3px solid #765b9a; outline-offset: 4px; }
+.kids-video-section { margin-top: 48px; padding: clamp(20px, 4vw, 34px); border: 1px solid rgba(120, 99, 151, .14); border-radius: 24px; background: rgba(255, 255, 255, .72); box-shadow: 0 12px 32px rgba(59, 47, 79, .06); }
+.kids-video-heading { margin-bottom: 18px; }
+.kids-video-heading h2 { font-family: Georgia, serif; font-size: clamp(25px, 4vw, 35px); line-height: 1.2; }
+.kids-video-heading p { margin-top: 8px; color: #827b8e; font-size: 14px; line-height: 1.6; }
+.kids-video-frame { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 16px; background: #211d30; }
+.kids-video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.kids-video-fallback { margin-top: 13px; color: #827b8e; font-size: 12px; line-height: 1.6; }
+.kids-video-fallback a { color: #755c9c; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.kids-video-fallback a:hover { color: #4f4388; }
+.kids-catalogue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 18px; }
+.kids-catalogue-card { overflow: hidden; border: 1px solid rgba(120, 99, 151, .14); border-radius: 18px; background: #fff; }
+.kids-catalogue-card > img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #eee9f5; }
+.kids-catalogue-copy { display: grid; gap: 10px; padding: 18px; }
+.kids-catalogue-copy h3, .kids-catalogue-empty h3 { font-family: Georgia, serif; font-size: 21px; }
+.kids-catalogue-copy p, .kids-catalogue-empty p { color: #827b8e; font-size: 13px; line-height: 1.6; }
+.kids-catalogue-copy .kids-age-guidance { width: fit-content; padding: 5px 9px; border-radius: 99px; background: #f0eaf7; color: #66517f; font-size: 11px; font-weight: 800; }
+.kids-catalogue-copy > a { width: fit-content; color: #755c9c; font-size: 13px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.kids-catalogue-empty { display: grid; justify-items: center; gap: 9px; padding: clamp(24px, 5vw, 44px); border: 1px dashed rgba(120, 99, 151, .28); border-radius: 18px; background: rgba(248, 244, 252, .7); text-align: center; }
+.kids-catalogue-empty > span { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: #ebe5ff; color: #8068a5; font-size: 21px; }
+.kids-catalogue-empty p { max-width: 510px; }
+.kids-premium-card { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 24px; padding: clamp(22px, 4vw, 34px); border: 1px solid rgba(120, 99, 151, .16); border-radius: 24px; background: linear-gradient(120deg, #f2ecff, #fff2e7); box-shadow: 0 12px 32px rgba(59, 47, 79, .06); }
+.kids-premium-card h2 { margin-top: 5px; font-family: Georgia, serif; font-size: clamp(24px, 4vw, 34px); }
+.kids-premium-card p { max-width: 620px; margin-top: 8px; color: #827b8e; font-size: 13px; line-height: 1.6; }
+.kids-premium-card .kids-premium-price { color: #4f4388; font-size: 22px; font-weight: 900; }
+.kids-premium-price span { color: #827b8e; font-size: 12px; font-weight: 600; }
+.kids-premium-card button { flex: 0 0 auto; padding: 12px 17px; border: 0; border-radius: 99px; background: #b9afc8; color: white; font-size: 12px; font-weight: 800; cursor: not-allowed; }
+.kids-note { margin-top: 22px; color: #9b96a3; font-size: 11px; text-align: center; }
+
+@keyframes character-float { 50% { transform: translate(-50%, -14px) rotate(2deg); } }
+@keyframes character-hop { to { transform: translate(-50%, -25px) rotate(4deg) scale(1.04); } }
+@keyframes cloud-drift { to { transform: translateX(22px); } }
+@keyframes orbit-pulse { 50% { transform: scale(1.08); } }
+@keyframes star-shimmer { 50% { opacity: .55; } }
+@keyframes bubble-up { 50% { transform: translateY(-16px) rotate(12deg); opacity: .6; } }
+@keyframes milo-twinkle { to { opacity: .6; } }
+@keyframes milo-drift { to { transform: translateX(22px); } }
+@keyframes milo-breathe { 50% { transform: translateY(-3px); } }
+@keyframes milo-narration-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 760px) {
+  .cartoon-stage { min-height: 520px; height: 66vh; max-height: 650px; }
+  .stage-character { top: 31%; }
+  .stage-orbit { right: 14%; }
+  .cloud-left { left: 2%; }.cloud-right { right: 1%; }
+  .stage-caption { bottom: 9%; }
+  .kids-content { width: min(92%, 560px); padding-top: 43px; }
+  .kids-heading { display: block; }.kids-heading p { margin-top: 8px; }
+  .story-grid { grid-template-columns: 1fr; gap: 10px; }
+  .milo-story { margin-top: 30px; }
+  .milo-story-header { grid-template-columns: 1fr; }
+  .milo-story-cover { min-height: 180px; }
+  .milo-player-heading { align-items: flex-start; }
+  .milo-player-controls button { flex: 1 1 auto; }
+  .milo-player-copy { min-height: 0; }
+  .milo-chapter-nav ol, .milo-activity-grid { grid-template-columns: 1fr; }
+  .milo-chapter p { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-stars, .stage-cloud, .stage-orbit, .stage-character, .stage-bubble, .milo-star, .milo-cloud, .milo-boy, .milo-player-copy .milo-narration { animation: none; }
+  .is-playing .stage-character { animation: none; }
+  .story-card, .story-play { transition: none; }
+}
+
+@media (max-width: 620px) {
+  .kids-premium-card { align-items: stretch; flex-direction: column; }
+  .kids-premium-card button { align-self: flex-start; }
+  .story-read-link { margin-left: 0; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .milo-story, .milo-story * { visibility: visible; }
+  .milo-story { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 0; border: 0; box-shadow: none; }
+  .milo-chapter-nav a { color: #222; text-decoration: none; }
+  .milo-chapter, .milo-learning-card { break-inside: avoid; }
+}
+
+/* Coveilla Kids: Netflix-inspired dark library and story player. */
+.kids-page { --kid-ink: #f5f5f7; min-height: 100vh; padding-bottom: 64px; background: #141414; color: #f5f5f7; }
+.kids-page .cartoon-stage { height: min(67vw, 700px); min-height: 470px; max-height: 700px; background: radial-gradient(ellipse at 78% 35%, #29294a 0%, transparent 35%), linear-gradient(115deg, #171719 0%, #111114 50%, #191522 100%); }
+.kids-page .cartoon-stage::before { display: none; }
+.kids-page .cartoon-stage.scene-garden { background: linear-gradient(145deg, #17201c, #141414 62%, #1e2418); }
+.kids-page .cartoon-stage.scene-space { background: radial-gradient(ellipse at 78% 28%, #332353, transparent 38%), linear-gradient(145deg, #11121b, #141414 70%); }
+.kids-page .kids-hero-art { position: absolute; inset: 0; }
+.kids-page .kids-hero-art .milo-scene-art { width: 100%; height: 100%; object-fit: cover; }
+.kids-page .kids-hero-art .mara-girl { transform-box: fill-box; transform-origin: center bottom; animation: milo-breathe 5.6s ease-in-out infinite, mara-tilt 9s ease-in-out infinite; }
+.kids-page .cartoon-stage.is-playing .kids-hero-art .milo-boy,
+.kids-page .cartoon-stage.is-playing .kids-hero-art .mara-girl { animation: hero-tell-story 1.7s ease-in-out infinite alternate; }
+.kids-page .cartoon-stage.scene-moon .stage-stars, .kids-page .cartoon-stage.scene-moon .stage-cloud,
+.kids-page .cartoon-stage.scene-moon .stage-orbit, .kids-page .cartoon-stage.scene-moon .stage-character,
+.kids-page .cartoon-stage.scene-moon .stage-hill { display: none; }
+.kids-page .stage-caption { z-index: 5; bottom: 9%; max-width: min(510px, 58%); }
+.kids-page .stage-caption h1 { color: #fff; font-family: Arial, Helvetica, sans-serif; font-weight: 850; letter-spacing: -.035em; text-shadow: 0 2px 24px rgba(0,0,0,.65); }
+.kids-page .stage-caption p { color: #dedbe1; }
+.kids-page .kids-pill { border-color: rgba(229,9,20,.56); background: rgba(229,9,20,.2); color: #fff; }
+.kids-page .stage-orbit { background: #fae9ad; box-shadow: 0 0 65px rgba(250,233,173,.4); }
+.kids-page .story-play { background: #e50914; color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.kids-page .story-play:hover { background: #b80710; }
+.kids-page .story-read-link { border-color: rgba(255,255,255,.5); background: rgba(20,20,20,.65); backdrop-filter: blur(10px); }
+.kids-page .kids-content { width: min(1240px, 92%); padding-top: 43px; }
+.kids-page .kids-heading { align-items: center; margin-bottom: 22px; }
+.kids-page .kids-overline { color: #f05a62; }
+.kids-page .kids-heading h2 { color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: clamp(24px, 3.4vw, 33px); letter-spacing: -.025em; }
+.kids-page .kids-heading p { max-width: 360px; color: #aaa6ad; }
+.kids-page .story-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 13px; }
+.kids-page .story-card { border: 1px solid #353538; border-radius: 9px; background: #202023; color: #f5f5f7; transition: border-color .18s, background .18s, transform .18s; }
+.kids-page .story-card:hover { transform: translateY(-2px); border-color: #69696d; background: #29292d; box-shadow: none; }
+.kids-page .story-card.selected { border-color: #e50914; background: #2a2022; box-shadow: inset 0 0 0 1px rgba(229,9,20,.22); }
+.kids-page .story-card.peach, .kids-page .story-card.mint, .kids-page .story-card.lilac { background: #202023; }
+.kids-page .story-emoji { border-radius: 8px; background: #333337; }
+.kids-page .story-card-copy small, .kids-page .story-arrow { color: #b5b1b8; }
+.kids-page .kids-video-section { border-color: #353538; background: #18181b; box-shadow: 0 14px 38px rgba(0,0,0,.22); }
+.kids-page .kids-video-heading h2 { color: #fff; font-family: Arial, Helvetica, sans-serif; }
+.kids-page .kids-video-heading p, .kids-page .kids-catalogue-copy p { color: #c0bbc3; }
+.kids-page .kids-catalogue-card { border-color: #38383b; background: #222225; }
+.kids-page .kids-catalogue-card > img { background: #303034; }
+.kids-page .kids-catalogue-copy h3, .kids-page .kids-catalogue-empty h3 { color: #fff; }
+.kids-page .kids-catalogue-copy .kids-age-guidance { background: #333238; color: #e6d9dc; }
+.kids-page .kids-catalogue-copy > a, .kids-page .kids-video-fallback a { color: #ff777e; }
+.kids-page .kids-catalogue-empty { border-color: #454146; background: #202023; }
+.kids-page .kids-catalogue-empty > span { background: #332327; color: #ff7b82; }
+.kids-page .kids-premium-card { border-color: #414044; background: linear-gradient(115deg, #251b20, #1a191d 70%); box-shadow: 0 14px 38px rgba(0,0,0,.2); }
+.kids-page .kids-premium-card h2 { color: #fff; }
+.kids-page .kids-premium-card p { color: #c0bbc3; }
+.kids-page .kids-premium-card .kids-premium-price { color: #ff737b; }
+.kids-page .kids-premium-price span { color: #aaa6ad; }
+.kids-page .kids-premium-card button { background: #4e3a3d; color: #eee3e4; }
+.kids-page .kids-note { color: #a19ca5; }
+.kids-page .milo-story { border-color: #343438; background: #18181b; color: #f5f2f4; box-shadow: 0 20px 55px rgba(0,0,0,.24); }
+.kids-page .milo-story-header { border-color: #37373b; }
+.kids-page .milo-story-intro h2, .kids-page .milo-chapter h3, .kids-page .milo-learning-card h3 { color: #fff; }
+.kids-page .milo-story-subtitle, .kids-page .milo-story-byline { color: #cbc5cf; }
+.kids-page .milo-story-byline span { color: #aaa4af; }
+.kids-page .milo-chapter-nav { background: #222225; }
+.kids-page .milo-chapter-nav h3 { color: #fff; }
+.kids-page .milo-chapter-nav li, .kids-page .milo-chapter-nav a { color: #f07a80; }
+.kids-page .milo-chapter-nav a { text-decoration-color: #77474b; }
+.kids-page .milo-chapter p { color: #ddd8df; }
+.kids-page .milo-chapter h3 span { color: #f0787f; }
+.kids-page .milo-learning-sections { border-color: #36363a; }
+.kids-page .milo-learning-card, .kids-page .milo-lesson, .kids-page .milo-activities, .kids-page .milo-adult-note { border-color: #37373b; background: #222225; }
+.kids-page .milo-learning-card p, .kids-page .milo-learning-card li { color: #d0cbd2; }
+.kids-page .milo-activity { border-color: #3d3b41; background: #29292d; }
+.kids-page .milo-activity h4 { color: #fff; }
+.kids-page .milo-activity-icon { background: #39272b; color: #ff7d84; }
+.kids-page .milo-drawing-space { border-color: #68616d; background: repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,255,255,.07) 30px 31px); }
+.kids-page .milo-fiction-note { border-color: #e50914; background: #242225; color: #c9c3cc; }
+
+/* Each scene keeps the same original characters while its light and accents change with the story. */
+.scene-art-happy-memories #milo-sky stop:first-child { stop-color: #272044; }
+.scene-art-happy-memories #milo-hill stop:first-child { stop-color: #5d5971; }
+.scene-art-mara-is-ill #milo-sky stop:first-child { stop-color: #20203d; }
+.scene-art-mara-is-ill #milo-glow stop:first-child { stop-color: #ded8f1; stop-opacity: .32; }
+.scene-art-mara-is-ill .mara-girl { filter: saturate(.68); }
+.scene-art-mara-is-ill .scene-calm-motifs { animation: milo-soft-float 4s ease-in-out infinite alternate; }
+.scene-art-goodbye-to-mara #milo-sky stop:first-child { stop-color: #191c37; }
+.scene-art-goodbye-to-mara .scene-goodbye-motifs { animation: memory-lights 3.5s ease-in-out infinite alternate; }
+.scene-art-milo-loses-mom #milo-sky stop:first-child, .scene-art-dear-moon #milo-sky stop:first-child { stop-color: #121a36; }
+.scene-art-milo-loses-mom .mara-memory, .scene-art-dear-moon .mara-memory, .scene-art-smile-again .mara-memory, .scene-art-hopeful-conclusion .mara-memory { opacity: .48; filter: drop-shadow(0 0 13px rgba(255,231,174,.3)); }
+.scene-art-milo-loses-mom .scene-memory-motifs { animation: memory-lights 4s ease-in-out infinite alternate; }
+.scene-art-dear-moon .scene-letter { transform-box: fill-box; transform-origin: center; animation: letter-glow 4s ease-in-out infinite alternate; }
+.scene-art-smile-again #milo-sky stop:first-child { stop-color: #332b48; }
+.scene-art-smile-again #milo-glow stop:first-child, .scene-art-hopeful-conclusion #milo-glow stop:first-child { stop-color: #ffe2a0; stop-opacity: .58; }
+.scene-art-smile-again .scene-hope-motifs, .scene-art-happy-memories .scene-happy-motifs { animation: memory-lights 3s ease-in-out infinite alternate; }
+.scene-art-hopeful-conclusion #milo-sky stop:first-child { stop-color: #3f3758; }
+.scene-art-hopeful-conclusion .scene-dawn { animation: dawn-glow 5s ease-in-out infinite alternate; }
+@keyframes milo-soft-float { to { transform: translateY(-5px); opacity: .35; } }
+@keyframes memory-lights { to { opacity: .48; transform: translateY(-4px); } }
+@keyframes letter-glow { to { filter: drop-shadow(0 0 8px rgba(255,239,190,.7)); } }
+@keyframes dawn-glow { to { opacity: .65; } }
+@keyframes photo-drift { from { transform: scale(1); } to { transform: scale(1.045); } }
+@keyframes hero-tell-story { to { transform: scaleY(1.025); } }
+
+@media (max-width: 760px) {
+  .kids-page .cartoon-stage { height: 66vh; min-height: 510px; max-height: 650px; }
+  .kids-page .stage-caption { max-width: 78%; }
+  .kids-page .kids-heading p { color: #aaa6ad; }
+  .kids-page .milo-story-cover { border: 1px solid #36363a; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kids-page .milo-scene-art .milo-cloud, .kids-page .milo-scene-art .milo-star,
+  .kids-page .milo-scene-art .milo-boy, .kids-page .milo-scene-art .mara-girl,
+  .kids-page .milo-scene-art .milo-blink, .kids-page .milo-scene-art .scene-motifs,
+  .kids-page .milo-scene-art .scene-letter, .kids-page .milo-scene-art .scene-dawn { animation: none; }
+  .kids-page .milo-photo-image { animation: none; }
+  .kids-page .story-card, .kids-page .story-play { transition: none; }
+  .kids-page .cartoon-stage.is-playing .kids-hero-art .milo-boy,
+  .kids-page .cartoon-stage.is-playing .kids-hero-art .mara-girl { animation: none; }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Interactive 3D Animated Story & Lip-Sync UI Enhancements                   */
+/* -------------------------------------------------------------------------- */
+
+.milo-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.milo-view-toggle {
+  display: inline-flex;
+  background: #202024;
+  border: 1px solid #38383e;
+  border-radius: 99px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.milo-toggle-btn {
+  background: transparent;
+  border: none;
+  border-radius: 99px;
+  color: #a8a29e;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.milo-toggle-btn:hover {
+  color: #fff;
+}
+
+.milo-toggle-btn.is-active {
+  background: #e50914;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(229, 9, 20, 0.35);
+}
+
+.milo-3d-canvas-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  position: relative;
+  background: #090e1f;
+  cursor: grab;
+}
+
+.milo-3d-canvas-wrap:active {
+  cursor: grabbing;
+}
+
+.milo-3d-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 24px;
+  background: #111422;
+  color: #fed7aa;
+  font-size: 15px;
+  text-align: center;
+}
+
+.milo-caption-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.milo-scene-tag {
+  color: #ff646d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.milo-speaking-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  animation: speaking-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.speaking-milo {
+  background: rgba(37, 99, 235, 0.28);
+  border: 1px solid #3b82f6;
+  color: #93c5fd;
+}
+
+.speaking-mara {
+  background: rgba(236, 72, 153, 0.28);
+  border: 1px solid #ec4899;
+  color: #fbcfe8;
+}
+
+.speaking-aunt {
+  background: rgba(168, 85, 247, 0.28);
+  border: 1px solid #a855f7;
+  color: #e9d5ff;
+}
+
+.speaking-narrator {
+  background: rgba(234, 179, 8, 0.25);
+  border: 1px solid #eab308;
+  color: #fef08a;
+}
+
+@keyframes speaking-pulse {
+  from {
+    transform: scale(0.97);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+  to {
+    transform: scale(1.03);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.milo-live-subtitle {
+  margin-top: 8px;
+  padding: 10px 14px;
+  background: rgba(15, 17, 23, 0.88);
+  border-left: 3px solid #e50914;
+  border-radius: 0 8px 8px 0;
+  backdrop-filter: blur(8px);
+}
+
+.milo-sub-speaker {
+  font-size: 12px;
+  font-weight: 800;
+  color: #f87171;
+  display: block;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.milo-sub-text {
+  font-size: 15px;
+  line-height: 1.45;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 500;
+}
+
+.milo-sound-btn.is-muted {
+  border-color: #f87171 !important;
+  color: #fca5a5 !important;
+}
+
+.milo-narration.is-active-line {
+  background: rgba(229, 9, 20, 0.12);
+  border-radius: 8px;
+  padding: 6px 10px;
+  border-left: 3px solid #e50914;
+}
+
+.milo-dialogue-line {
+  transition: all 0.2s ease;
+  padding: 5px 8px;
+  border-radius: 6px;
+}
+
+.milo-dialogue-line.is-active-line {
+  background: rgba(229, 9, 20, 0.14);
+  border-left: 3px solid #ff4d58;
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.milo-dialogue-line.char-milo strong {
+  color: #60a5fa !important;
+}
+
+.milo-dialogue-line.char-mara strong {
+  color: #f472b6 !important;
+}
+
+.milo-dialogue-line.char-aunt strong {
+  color: #c084fc !important;
+}
+
+
+.speaking-mother {
+  background: rgba(217, 119, 6, 0.28);
+  border: 1px solid #d97706;
+  color: #fde68a;
+}
+
+.speaking-doctor {
+  background: rgba(13, 148, 136, 0.28);
+  border: 1px solid #0d9488;
+  color: #99f6e4;
+}
+
+.milo-dialogue-line.char-mother strong {
+  color: #fbbf24 !important;
+}
+
+.milo-dialogue-line.char-doctor strong {
+  color: #2dd4bf !important;
+}
+
+.milo-camera-toggle {
+  display: inline-flex;
+  background: #202024;
+  border: 1px solid #38383e;
+  border-radius: 99px;
+  padding: 3px;
+  gap: 4px;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Cinematic Opening Introduction & Ending Credits Styling                   */
+/* -------------------------------------------------------------------------- */
+
+.milo-intro-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(20px, 4vw, 44px);
+  background: radial-gradient(circle at center, rgba(14, 21, 46, 0.65) 0%, rgba(8, 12, 28, 0.92) 80%);
+  backdrop-filter: blur(8px);
+  animation: intro-fade-in 1.2s ease-out both;
+}
+
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.milo-intro-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(229, 9, 20, 0.2);
+  border: 1px solid rgba(229, 9, 20, 0.45);
+  border-radius: 99px;
+  color: #ff646d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  margin-bottom: 14px;
+}
+
+.milo-intro-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 6vw, 62px);
+  font-weight: 800;
+  color: #fffaf0;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 24px rgba(254, 243, 199, 0.35);
+}
+
+.milo-intro-subtitle {
+  font-size: clamp(15px, 2.2vw, 20px);
+  color: #e2e8f0;
+  max-width: 580px;
+  margin: 0 0 12px;
+  line-height: 1.45;
+}
+
+.milo-intro-credit {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fbbf24;
+  margin: 0 0 8px;
+}
+
+.milo-intro-audience {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 24px;
+}
+
+.milo-intro-buttons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.milo-btn-primary {
+  background: linear-gradient(135deg, #e50914, #b91c1c);
+  color: #ffffff;
+  border: none;
+  border-radius: 99px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+  transition: all 0.2s ease;
+}
+
+.milo-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(229, 9, 20, 0.55);
+}
+
+.milo-btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 99px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.milo-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #ffffff;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Ending Credits & Reflection Sequence                                      */
+/* -------------------------------------------------------------------------- */
+
+.milo-ending-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(20px, 3.5vw, 38px);
+  background: radial-gradient(circle at center, rgba(11, 15, 33, 0.88) 0%, rgba(5, 7, 18, 0.96) 85%);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  animation: ending-fade-in 1.4s ease-out both;
+}
+
+@keyframes ending-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.milo-ending-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(251, 191, 36, 0.18);
+  border: 1px solid #fbbf24;
+  border-radius: 99px;
+  color: #fef08a;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  margin-bottom: 8px;
+}
+
+.milo-ending-title {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.milo-ending-author {
+  font-size: 14px;
+  color: #cbd5e1;
+  font-style: italic;
+  margin: 0 0 6px;
+}
+
+.milo-ending-age {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fca5a5;
+  margin-bottom: 16px;
+}
+
+.milo-ending-reflections {
+  max-width: 660px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+
+.milo-ending-reflections p {
+  font-size: clamp(13px, 1.6vw, 15px);
+  line-height: 1.6;
+  color: #e2e8f0;
+  margin: 0 0 10px;
+}
+
+.milo-ending-reflections p:last-child {
+  margin-bottom: 0;
+}
+
+.milo-ending-highlight {
+  color: #fef08a !important;
+  font-size: 14px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.milo-ending-motto {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0 0 18px;
+}
+
+.milo-ending-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.milo-ending-nav-btn {
+  border-color: #fbbf24 !important;
+  background: linear-gradient(135deg, #2b1f14, #1f1d24) !important;
+}
+
+.milo-ending-nav-btn span {
+  color: #fbbf24 !important;
+}
+
+.speaking-moon {
+  background: rgba(251, 191, 36, 0.28);
+  border: 1px solid #f59e0b;
+  color: #fef08a;
+}
+
+.milo-dialogue-line.char-moon strong {
+  color: #fef08a !important;
+}
+
+.milo-zoom-btn {
+  min-width: 58px;
+  font-weight: 800;
+}

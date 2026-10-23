@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiRequest } from "../auth/api";
 import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState("");
 
   const fetchArticles = () => {
-    fetch("http://127.0.0.1:5055/api/articles")
-      .then((res) => res.json())
-      .then((data) => setArticles(data));
+    apiRequest("/api/articles", { token: null })
+      .then((data) => setArticles(data))
+      .catch((err) => setError(err.message));
   };
 
   useEffect(() => {
@@ -16,16 +18,19 @@ function AdminDashboard() {
   }, []);
 
   const deleteArticle = async (slug) => {
-    await fetch(`http://127.0.0.1:5055/api/articles/${slug}`, {
-      method: "DELETE",
-    });
-
-    setArticles(articles.filter((a) => a.slug !== slug));
+    try {
+      await apiRequest(`/api/articles/${slug}`, { method: "DELETE" });
+      setArticles((current) => current.filter((article) => article.slug !== slug));
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
+      <p><Link to="/admin/articles/new">Create article</Link> | <Link to="/admin/messages">Contact messages</Link></p>
+      {error && <p role="alert">{error}</p>}
 
       <table>
         <thead>
@@ -43,7 +48,7 @@ function AdminDashboard() {
               <td>{article.category}</td>
 
               <td>
-                <Link to={`/edit/${article.slug}`}>Edit ✏️</Link>
+                <Link to={`/admin/articles/${article.slug}/edit`}>Edit</Link>
 
                 <button onClick={() => deleteArticle(article.slug)}>
                   Delete 🗑

@@ -1,0 +1,6 @@
+.create-article-page { width: min(850px, 92%); margin: 32px auto; color: #25233a; }
+.create-article-page h1 { margin-bottom: 20px; font-family: Georgia, serif; }
+.create-form { display: grid; gap: 13px; }
+.create-form input, .create-form textarea { width: 100%; padding: 12px; border: 1px solid #d8d4df; border-radius: 8px; background: #fff; color: #25233a; }
+.create-form button { justify-self: start; padding: 11px 17px; border-radius: 8px; background: #604a86; color: #fff; font-weight: 700; }
+.create-article-page .error { margin-bottom: 12px; color: #b53545; }

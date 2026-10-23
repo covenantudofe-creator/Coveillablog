@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { apiRequest } from "../auth/api";
 
 function EditArticle() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
   const [form, setForm] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5050/api/articles/${slug}`)
-      .then((res) => res.json())
-      .then((data) => setForm(data));
+    apiRequest(`/api/articles/${slug}`, { token: null })
+      .then((data) => setForm(data))
+      .catch((err) => setError(err.message));
   }, [slug]);
 
   const handleChange = (e) => {
@@ -20,19 +22,20 @@ function EditArticle() {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://127.0.0.1:5055/api/articles/${slug}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    navigate(`/article/${slug}`);
+    try {
+      await apiRequest(`/api/articles/${slug}`, { method: "PUT", body: JSON.stringify(form) });
+      navigate(`/article/${slug}`);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
+  if (error && !form) return <p role="alert">{error}</p>;
   if (!form) return <p>Loading...</p>;
 
   return (
     <form onSubmit={handleUpdate}>
+      {error && <p role="alert">{error}</p>}
       <input name="title" value={form.title} onChange={handleChange} />
       <input name="category" value={form.category} onChange={handleChange} />
       <textarea name="content" value={form.content} onChange={handleChange} />

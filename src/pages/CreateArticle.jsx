@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiRequest } from "../auth/api";
 import "../styles/CreateArticle.css";
 
 function CreateArticle() {
@@ -48,19 +49,10 @@ function CreateArticle() {
     setError("");
 
     try {
-      const res = await fetch("http://127.0.0.1:5055/api/articles", {
+      const data = await apiRequest("/api/articles", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(form),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
 
       setLoading(false);
 

@@ -7,6 +7,7 @@ const sendEmail = require("../utils/sendEmail");
 
 const newsletterWelcome = require("../emails/newsletterWelcome");
 const newsletterOwner = require("../emails/newsletterOwner");
+const { authenticateToken, requireRole } = require("../middleware/auth");
 
 /*
 POST
@@ -46,12 +47,14 @@ router.post("/", async (req, res) => {
       newsletterWelcome(email)
     );
 
-    // Notify owner
-    await sendEmail(
-      process.env.EMAIL_USER,
-      "🎉 New Newsletter Subscriber",
-      newsletterOwner(email)
-    );
+    // Notify owner when configured
+    if (process.env.OWNER_EMAIL) {
+      await sendEmail(
+        process.env.OWNER_EMAIL,
+        "🎉 New Newsletter Subscriber",
+        newsletterOwner(email)
+      );
+    }
 
     res.status(201).json({
       success: true,
@@ -75,7 +78,7 @@ router.post("/", async (req, res) => {
 GET ALL SUBSCRIBERS
 */
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateToken, requireRole("admin"), async (req, res) => {
 
   const subscribers = await Newsletter.findAll({
     order: [["createdAt", "DESC"]],
@@ -89,7 +92,7 @@ router.get("/", async (req, res) => {
 DELETE SUBSCRIBER
 */
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateToken, requireRole("admin"), async (req, res) => {
 
   const subscriber = await Newsletter.findByPk(req.params.id);
 
