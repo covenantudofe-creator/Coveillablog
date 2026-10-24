@@ -1141,8 +1141,9 @@ export default function Milo3DScene({
     if (!container) return undefined;
     setRenderError(false);
 
-    const width = container.clientWidth || 960;
-    const height = container.clientHeight || 540;
+    const initialRect = container.getBoundingClientRect();
+    const width = Math.max(1, Math.round(initialRect.width));
+    const height = Math.max(1, Math.round(initialRect.height));
 
     const scene = new THREE.Scene();
 
@@ -1162,7 +1163,7 @@ export default function Milo3DScene({
     };
     scene.background = new THREE.Color(bgColors[sceneId] || 0x0f172a);
 
-    const camera = new THREE.PerspectiveCamera(38 / (zoomLevel || 1.0), width / height, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(38 / (stateRef.current.zoomLevel || 1.0), width / height, 0.1, 100);
     camera.position.set(0, 1.8, 5.2);
 
     let renderer;
@@ -1173,11 +1174,15 @@ export default function Milo3DScene({
         alpha: true,
         powerPreference: "low-power",
       });
-      renderer.setSize(width, height);
+      renderer.setSize(width, height, false);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isSmallScreen ? 1 : 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.15;
       container.innerHTML = "";
+      renderer.domElement.style.position = "absolute";
+      renderer.domElement.style.inset = "0";
+      renderer.domElement.style.width = "100%";
+      renderer.domElement.style.height = "100%";
       container.appendChild(renderer.domElement);
     } catch {
       renderer?.dispose();
@@ -1310,16 +1315,29 @@ export default function Milo3DScene({
     window.addEventListener("pointermove", onPointerMove);
 
     // Resize observer
-    const resizeObserver = new ResizeObserver(() => {
+    let lastWidth = width;
+    let lastHeight = height;
+    const resizeRenderer = () => {
       if (!container || !renderer) return;
-      const w = container.clientWidth || 960;
-      const h = container.clientHeight || 540;
+      const rect = container.getBoundingClientRect();
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+      if (w < 1 || h < 1 || (w === lastWidth && h === lastHeight)) return;
+      lastWidth = w;
+      lastHeight = h;
       camera.aspect = w / h;
       camera.fov = 38 / (stateRef.current.zoomLevel || 1.0);
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    });
-    resizeObserver.observe(container);
+      renderer.setSize(w, h, false);
+    };
+    const resizeObserver = typeof ResizeObserver === "undefined"
+      ? null
+      : new ResizeObserver(resizeRenderer);
+    resizeObserver?.observe(container);
+    window.addEventListener("resize", resizeRenderer);
+    window.addEventListener("orientationchange", resizeRenderer);
+    window.visualViewport?.addEventListener("resize", resizeRenderer);
+    resizeRenderer();
 
     // Animation variables
     let animId = null;
@@ -1608,7 +1626,10 @@ export default function Milo3DScene({
       visibilityObserver?.disconnect();
       document.removeEventListener("visibilitychange", updateAnimationState);
       window.removeEventListener("pointermove", onPointerMove);
-      resizeObserver.disconnect();
+      window.removeEventListener("resize", resizeRenderer);
+      window.removeEventListener("orientationchange", resizeRenderer);
+      window.visualViewport?.removeEventListener("resize", resizeRenderer);
+      resizeObserver?.disconnect();
       renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
 
       scene.traverse((obj) => {
@@ -1628,7 +1649,7 @@ export default function Milo3DScene({
         }
       }
     };
-  }, [sceneId, zoomLevel, renderError]);
+  }, [sceneId, renderError]);
 
   if (renderError) {
     return (
@@ -1648,7 +1669,6 @@ export default function Milo3DScene({
         position: "relative",
         width: "100%",
         height: "100%",
-        minHeight: "460px",
         overflow: "hidden",
         touchAction: "none",
       }}

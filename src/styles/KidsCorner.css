@@ -156,7 +156,12 @@
 @media (max-width: 620px) {
   .milo-player { padding: 15px; }
   .milo-player-screen { border-radius: 11px; }
-  .milo-player-screen:has(.milo-3d-canvas-wrap) { min-height: 460px; aspect-ratio: 4 / 5; }
+  .milo-player-screen:has(.milo-3d-canvas-wrap) {
+    height: clamp(220px, min(110vw, 68vh), 480px);
+    height: clamp(220px, min(110vw, 68svh), 480px);
+    min-height: 0;
+    aspect-ratio: auto;
+  }
   .milo-player-screen .milo-3d-canvas-wrap { min-height: 0; }
   .milo-player-screen .milo-photo-scene { aspect-ratio: 4 / 5; }
   .milo-glass-controls { gap: 5px; min-height: 54px; padding: 6px; }
@@ -167,6 +172,15 @@
   .milo-voice-grid { grid-template-columns: 1fr; }
   .milo-voice-grid p { grid-column: auto; }
   .milo-scene-row { grid-auto-columns: minmax(140px, 42vw); }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .milo-player-screen:has(.milo-3d-canvas-wrap) {
+    height: clamp(200px, 70vh, 420px);
+    height: clamp(200px, 70svh, 420px);
+    min-height: 0;
+    aspect-ratio: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -437,7 +451,7 @@
 .milo-3d-canvas-wrap {
   width: 100%;
   height: 100%;
-  min-height: 480px;
+  min-height: 0;
   position: relative;
   background: #090e1f;
   cursor: grab;
@@ -867,7 +881,7 @@
 }
 
 @media (max-width: 760px) {
-  .milo-3d-canvas-wrap { min-height: min(68svh, 480px); }
+  .milo-3d-canvas-wrap { min-height: 0; }
   .milo-heading-actions { width: 100%; }
   .milo-toggle-btn { padding-inline: 10px; }
 }
